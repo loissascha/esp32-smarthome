@@ -10,9 +10,11 @@ void WebserverMgr::handleRoot() {
 
 void WebserverMgr::handleSensors() {
 	float temp = dhtmgr.getTempCels();
+	float humidity = dhtmgr.getHumidity();
 	String out = "";
 	out += "{ \"tempC\": ";
-	out += String(temp);
+	out += String(temp) + ",";
+	out += " \"humidity\": " + String(humidity);
 	out += "}\n";
   server.send(200, "text/plain; charset=utf-8", out);
 }
