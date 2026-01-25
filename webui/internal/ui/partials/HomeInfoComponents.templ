@@ -6,19 +6,33 @@ templ HomeInfoComponents() {
 	<div class="flex flex-col gap-4">
 		<div class="text-4xl text-center">Sensoren</div>
 		<div class="grid grid-cols-3 gap-4">
-			@components.InfoComponent("Temperatur", "22.70 C")
-			@components.InfoComponent("Luftfeuchtigkeit", "36.60 %")
-			@components.InfoComponent("Lärmpegel", "98 dB")
+			@components.InfoComponent("Temperatur") {
+				<span>22.70 C</span>
+			}
+			@components.InfoComponent("Luftfeuchtigkeit") {
+				<span>36.60 %</span>
+			}
+			@components.InfoComponent("Lärmpegel") {
+				<span>98 dB</span>
+			}
 		</div>
 		<div class="text-4xl text-center">Licht</div>
 		<div class="grid grid-cols-3 gap-4">
-			@components.InfoComponent("Tischlampe Modus", "Automatisch")
-			@components.InfoComponent("Tischlampe Status", "Aus")
+			@components.InfoComponent("Tischlampe Modus") {
+				<span class="text-green-500">Automatisch</span>
+			}
+			@components.InfoComponent("Tischlampe Status") {
+				<span class="text-red-500">Aus</span>
+			}
 		</div>
 		<div class="text-4xl text-center">Status</div>
 		<div class="grid grid-cols-3 gap-4">
-			@components.InfoComponent("Zeitmodus", "Tag")
-			@components.InfoComponent("PC Online", "Ja")
+			@components.InfoComponent("Zeitmodus") {
+				<span>Tag</span>
+			}
+			@components.InfoComponent("PC") {
+				<span class="text-green-500">Online</span>
+			}
 		</div>
 	</div>
 }
