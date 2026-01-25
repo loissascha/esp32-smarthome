@@ -1,37 +1,54 @@
 package partials
 
 import "github.com/loissascha/go-templ-template/internal/ui/components"
+import "github.com/loissascha/go-templ-template/internal/services/espservice"
 
-templ HomeInfoComponents(tempC float64, humidity float64) {
+templ HomeInfoComponents(sensors espservice.ESPSensorData) {
 	<div class="flex flex-col gap-4">
 		<div class="text-4xl text-center">Sensoren</div>
 		<div class="grid grid-cols-3 gap-4">
 			@components.InfoComponent("Temperatur") {
-				<span>{ tempC } C</span>
+				<span>{ sensors.TempC } C</span>
 			}
 			@components.InfoComponent("Luftfeuchtigkeit") {
-				<span>{ humidity } %</span>
+				<span>{ sensors.Humidity } %</span>
 			}
 			@components.InfoComponent("Lärmpegel") {
-				<span>98 dB</span>
+				<span>{ sensors.VoiceLevel } dB</span>
 			}
 		</div>
 		<div class="text-4xl text-center">Licht</div>
 		<div class="grid grid-cols-3 gap-4">
 			@components.InfoComponent("Tischlampe Modus") {
-				<span class="text-green-500">Automatisch</span>
+				if sensors.TischlampeManualMode {
+					<span class="text-red-500">Manuell</span>
+				} else {
+					<span class="text-green-500">Automatisch</span>
+				}
 			}
 			@components.InfoComponent("Tischlampe Status") {
-				<span class="text-red-500">Aus</span>
+				if sensors.TischlampeStatus {
+					<span class="text-green-500">An</span>
+				} else {
+					<span class="text-red-500">Aus</span>
+				}
 			}
 		</div>
 		<div class="text-4xl text-center">Status</div>
 		<div class="grid grid-cols-3 gap-4">
 			@components.InfoComponent("Zeitmodus") {
-				<span>Tag</span>
+				if sensors.IsDaytime {
+					<span>Tag</span>
+				} else {
+					<span>Nacht</span>
+				}
 			}
 			@components.InfoComponent("PC") {
-				<span class="text-green-500">Online</span>
+				if sensors.PCOnline {
+					<span class="text-green-500">Online</span>
+				} else {
+					<span class="text-red-500">Offline</span>
+				}
 			}
 		</div>
 	</div>

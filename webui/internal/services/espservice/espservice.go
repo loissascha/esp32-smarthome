@@ -7,9 +7,18 @@ import (
 	"time"
 )
 
+type ESPSensorData struct {
+	TempC                float64
+	Humidity             float64
+	VoiceLevel           float64
+	TischlampeManualMode bool
+	TischlampeStatus     bool
+	IsDaytime            bool
+	PCOnline             bool
+}
+
 type ESPService struct {
-	TempC    float64
-	Humidity float64
+	Sensors ESPSensorData
 }
 
 func New() *ESPService {
@@ -28,8 +37,13 @@ func (e *ESPService) RunSync() {
 
 func (e *ESPService) sync() error {
 	type SensorResponse struct {
-		TempC    float64 `json:"tempC"`
-		Humidity float64 `json:"humidity"`
+		TempC                float64 `json:"tempC"`
+		Humidity             float64 `json:"humidity"`
+		VoiceLevel           float64 `json:"voice_level"`
+		TischlampeManualMode int     `json:"tischlampe_manual_mode"`
+		TischlampeStatus     int     `json:"tischlampe_status"`
+		IsDaytime            int     `json:"is_daytime"`
+		PCOnline             int     `json:"pc_online"`
 	}
 
 	client := &http.Client{
@@ -53,8 +67,33 @@ func (e *ESPService) sync() error {
 
 	fmt.Println("sync result:", result)
 
-	e.TempC = result.TempC
-	e.Humidity = result.Humidity
+	e.Sensors.TempC = result.TempC
+	e.Sensors.Humidity = result.Humidity
+	e.Sensors.VoiceLevel = result.VoiceLevel
+
+	if result.TischlampeManualMode == 1 {
+		e.Sensors.TischlampeManualMode = true
+	} else {
+		e.Sensors.TischlampeManualMode = false
+	}
+
+	if result.TischlampeStatus == 1 {
+		e.Sensors.TischlampeStatus = true
+	} else {
+		e.Sensors.TischlampeStatus = false
+	}
+
+	if result.IsDaytime == 1 {
+		e.Sensors.IsDaytime = true
+	} else {
+		e.Sensors.IsDaytime = false
+	}
+
+	if result.PCOnline == 1 {
+		e.Sensors.PCOnline = true
+	} else {
+		e.Sensors.PCOnline = false
+	}
 
 	return nil
 }
