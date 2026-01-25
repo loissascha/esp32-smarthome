@@ -21,9 +21,9 @@ templ HomeInfoComponents(sensors espservice.ESPSensorData) {
 		<div class="grid grid-cols-3 gap-4">
 			@components.InfoComponent("Tischlampe Modus") {
 				if sensors.TischlampeManualMode {
-					<span class="text-red-500">Manuell</span>
+					<span>Manuell</span>
 				} else {
-					<span class="text-green-500">Automatisch</span>
+					<span>Automatisch</span>
 				}
 			}
 			@components.InfoComponent("Tischlampe Status") {
