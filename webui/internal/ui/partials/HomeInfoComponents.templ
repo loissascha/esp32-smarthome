@@ -2,7 +2,7 @@ package partials
 
 import "github.com/loissascha/go-templ-template/internal/ui/components"
 
-templ HomeInfoComponents(tempC float64) {
+templ HomeInfoComponents(tempC float64, humidity float64) {
 	<div class="flex flex-col gap-4">
 		<div class="text-4xl text-center">Sensoren</div>
 		<div class="grid grid-cols-3 gap-4">
@@ -10,7 +10,7 @@ templ HomeInfoComponents(tempC float64) {
 				<span>{ tempC } C</span>
 			}
 			@components.InfoComponent("Luftfeuchtigkeit") {
-				<span>36.60 %</span>
+				<span>{ humidity } %</span>
 			}
 			@components.InfoComponent("Lärmpegel") {
 				<span>98 dB</span>

@@ -8,7 +8,8 @@ import (
 )
 
 type ESPService struct {
-	TempC float64
+	TempC    float64
+	Humidity float64
 }
 
 func New() *ESPService {
@@ -17,17 +18,18 @@ func New() *ESPService {
 
 func (e *ESPService) RunSync() {
 	for {
-		time.Sleep(10 * time.Second)
 		err := e.sync()
 		if err != nil {
 			fmt.Println("sync error:", err)
 		}
+		time.Sleep(10 * time.Second)
 	}
 }
 
 func (e *ESPService) sync() error {
 	type SensorResponse struct {
-		TempC float64 `json:"tempC"`
+		TempC    float64 `json:"tempC"`
+		Humidity float64 `json:"humidity"`
 	}
 
 	client := &http.Client{
@@ -49,7 +51,10 @@ func (e *ESPService) sync() error {
 		return err
 	}
 
+	fmt.Println("sync result:", result)
+
 	e.TempC = result.TempC
+	e.Humidity = result.Humidity
 
 	return nil
 }

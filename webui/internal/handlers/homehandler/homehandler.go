@@ -27,7 +27,7 @@ func (h *HomeHandler) RegisterHandlers(s *server.Server) {
 }
 
 func (h *HomeHandler) partialsInfos(w http.ResponseWriter, r *http.Request) {
-	partials.HomeInfoComponents(h.espserv.TempC).Render(r.Context(), w)
+	partials.HomeInfoComponents(h.espserv.TempC, h.espserv.Humidity).Render(r.Context(), w)
 }
 
 func (h *HomeHandler) homeRoute(w http.ResponseWriter, r *http.Request) {
