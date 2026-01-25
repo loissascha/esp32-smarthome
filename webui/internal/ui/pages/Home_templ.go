@@ -43,7 +43,7 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"container mx-auto p-5\"><div class=\"text-center\"><h1 class=\"text-4xl mb-4 font-bold\">Heading oderso :)</h1></div><div class=\"grid grid-cols-3 gap-4\" hx-get=\"/partials/infos\" hx-swap=\"innerHTML\" hx-trigger=\"load\"></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"container mx-auto p-5\"><div hx-get=\"/partials/infos\" hx-swap=\"innerHTML\" hx-trigger=\"load\"></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
