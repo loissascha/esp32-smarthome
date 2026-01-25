@@ -28,8 +28,9 @@ void LightcontrolMgr::loop() {
 		if (!daytime && pconline) {
 			newStatus = true;
 		}
+	} else { // tischlampe manual mode
+		newStatus = settingsmgr.tischlampeManualStatus;
 	}
-	// TODO: tischlampe manual mode implementation
 
 	// update tischlampe (send home assistant request) if status is different
 	if (newStatus != tischlampeStatus) {

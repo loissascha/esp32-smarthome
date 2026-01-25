@@ -6,5 +6,6 @@ class SettingsMgr {
 public:
 	SettingsMgr();
 	bool tischlampeManualMode;
+	bool tischlampeManualStatus;
 private:
 };

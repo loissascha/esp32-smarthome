@@ -48,9 +48,39 @@ void WebserverMgr::handlePostMessage() {
   server.send(200, "text/plain; charset=utf-8", "OK\n");
 }
 
+void WebserverMgr::handleTischlampeModeSwitch(bool manual) {
+  if (server.method() != HTTP_POST) {
+    server.send(405, "text/plain", "Method not allowed\n");
+    return;
+  }
+
+	settingsmgr.tischlampeManualMode = manual;
+	settingsmgr.tischlampeManualStatus = lightcontrolmgr.getTischlampeStatus();
+	server.send(200, "text/plain; charset=utf-8", "OK\n");
+}
+
+void WebserverMgr::handleTischlampeManualStatusSwitch(bool status) {
+  if (server.method() != HTTP_POST) {
+    server.send(405, "text/plain", "Method not allowed\n");
+    return;
+  }
+
+	if (!settingsmgr.tischlampeManualMode) {
+		server.send(500, "text/plain", "Not in manual mode\n");
+		return;
+	}
+
+	settingsmgr.tischlampeManualStatus = status;
+	server.send(200, "text/plain; charset=utf-8", "OK\n");
+}
+
 void WebserverMgr::setup() {
   server.on("/", HTTP_GET, [this]() { this->handleRoot(); });
   server.on("/sensors", HTTP_GET, [this]() { this->handleSensors(); });
+  server.on("/tischlampe/mode/manual", HTTP_POST, [this]() { this->handleTischlampeModeSwitch(true); });
+  server.on("/tischlampe/mode/auto", HTTP_POST, [this]() { this->handleTischlampeModeSwitch(false); });
+  server.on("/tischlampe/manual/on", HTTP_POST, [this]() { this->handleTischlampeManualStatusSwitch(true); });
+  server.on("/tischlampe/manual/off", HTTP_POST, [this]() { this->handleTischlampeManualStatusSwitch(false); });
   server.on("/post", HTTP_POST, [this]() { this->handlePostMessage(); });
   server.onNotFound([this]() { this->handleNotFound(); });
 

@@ -10,19 +10,21 @@
 
 class WebserverMgr {
 public:
-  WebserverMgr(DHTMgr &dhtmgr, TimeMgr &timemgr, PCOnlineMgr &pconlinemgr, SettingsMgr &settingsmgr, LightcontrolMgr &lightcontrolmgr);
-  void setup();
-  void loop();
+	WebserverMgr(DHTMgr &dhtmgr, TimeMgr &timemgr, PCOnlineMgr &pconlinemgr, SettingsMgr &settingsmgr, LightcontrolMgr &lightcontrolmgr);
+	void setup();
+	void loop();
 
 private:
-  WebServer server;
+	WebServer server;
 	DHTMgr &dhtmgr;
 	TimeMgr &timemgr;
 	PCOnlineMgr &pconlinemgr;
 	SettingsMgr &settingsmgr;
 	LightcontrolMgr &lightcontrolmgr;
-  void handleRoot();
-  void handleSensors();
-  void handleNotFound();
-  void handlePostMessage();
+	void handleRoot();
+	void handleSensors();
+	void handleNotFound();
+	void handlePostMessage();
+	void handleTischlampeModeSwitch(bool manual);
+	void handleTischlampeManualStatusSwitch(bool status);
 };
