@@ -5,7 +5,7 @@ import "github.com/loissascha/go-templ-template/internal/ui/layouts"
 templ Home() {
 	@layouts.Layout() {
 		<div class="container mx-auto p-5">
-			<div hx-get="/partials/infos" hx-swap="innerHTML" hx-trigger="load every 20s"></div>
+			<div hx-get="/partials/infos" hx-swap="innerHTML" hx-trigger="every 10s"></div>
 		</div>
 	}
 }

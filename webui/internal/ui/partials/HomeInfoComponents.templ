@@ -2,12 +2,12 @@ package partials
 
 import "github.com/loissascha/go-templ-template/internal/ui/components"
 
-templ HomeInfoComponents() {
+templ HomeInfoComponents(tempC float64) {
 	<div class="flex flex-col gap-4">
 		<div class="text-4xl text-center">Sensoren</div>
 		<div class="grid grid-cols-3 gap-4">
 			@components.InfoComponent("Temperatur") {
-				<span>22.70 C</span>
+				<span>{ tempC } C</span>
 			}
 			@components.InfoComponent("Luftfeuchtigkeit") {
 				<span>36.60 %</span>

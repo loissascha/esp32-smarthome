@@ -33,7 +33,7 @@ func main() {
 	}()
 
 	// handler
-	homeH := homehandler.New(s)
+	homeH := homehandler.New(s, espS)
 
 	// register routes
 	homeH.RegisterHandlers(s)

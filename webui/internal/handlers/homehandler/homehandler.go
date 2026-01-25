@@ -4,17 +4,20 @@ import (
 	"net/http"
 
 	"github.com/loissascha/go-http-server/server"
+	"github.com/loissascha/go-templ-template/internal/services/espservice"
 	"github.com/loissascha/go-templ-template/internal/ui/pages"
 	"github.com/loissascha/go-templ-template/internal/ui/partials"
 )
 
 type HomeHandler struct {
-	s *server.Server
+	s       *server.Server
+	espserv *espservice.ESPService
 }
 
-func New(s *server.Server) *HomeHandler {
+func New(s *server.Server, esps *espservice.ESPService) *HomeHandler {
 	return &HomeHandler{
-		s: s,
+		s:       s,
+		espserv: esps,
 	}
 }
 
@@ -24,7 +27,7 @@ func (h *HomeHandler) RegisterHandlers(s *server.Server) {
 }
 
 func (h *HomeHandler) partialsInfos(w http.ResponseWriter, r *http.Request) {
-	partials.HomeInfoComponents().Render(r.Context(), w)
+	partials.HomeInfoComponents(h.espserv.TempC).Render(r.Context(), w)
 }
 
 func (h *HomeHandler) homeRoute(w http.ResponseWriter, r *http.Request) {
