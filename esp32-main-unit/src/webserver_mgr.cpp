@@ -1,6 +1,7 @@
 #include "webserver_mgr.h"
 
-WebserverMgr::WebserverMgr(DHTMgr &dhtmgr) : server(80), dhtmgr(dhtmgr) {}
+WebserverMgr::WebserverMgr(DHTMgr &dhtmgr, TimeMgr &timemgr, PCOnlineMgr &pconlinemgr, SettingsMgr &settingsmgr, LightcontrolMgr &lightcontrolmgr) : 
+	server(80), dhtmgr(dhtmgr), timemgr(timemgr), pconlinemgr(pconlinemgr), settingsmgr(settingsmgr), lightcontrolmgr(lightcontrolmgr) {}
 
 void WebserverMgr::handleRoot() {
   String out;
@@ -11,10 +12,19 @@ void WebserverMgr::handleRoot() {
 void WebserverMgr::handleSensors() {
 	float temp = dhtmgr.getTempCels();
 	float humidity = dhtmgr.getHumidity();
+	bool tischlampeManualMode = settingsmgr.tischlampeManualMode;
+	bool tischlampeStatus = lightcontrolmgr.getTischlampeStatus();
+	bool isDaytime = timemgr.isDaytime();
+	bool pcOnline = pconlinemgr.getOnlineStatus();
 	String out = "";
 	out += "{ \"tempC\": ";
 	out += String(temp) + ",";
-	out += " \"humidity\": " + String(humidity);
+	out += " \"humidity\": " + String(humidity) + ",";
+	out += " \"voice_level\": 0,";
+	out += " \"tischlampe_manual_mode\": " + String(tischlampeManualMode) + ",";
+	out += " \"tischlampe_status\": " + String(tischlampeStatus) + ",";
+	out += " \"is_daytime\": " + String(isDaytime) + ",";
+	out += " \"pc_online\": " + String(pcOnline);
 	out += "}\n";
   server.send(200, "text/plain; charset=utf-8", out);
 }

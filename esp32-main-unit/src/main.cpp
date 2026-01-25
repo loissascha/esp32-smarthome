@@ -19,8 +19,8 @@ WifiMgr wifimgr;
 TimeMgr timemgr;
 PCOnlineMgr pconlinemgr;
 DHTMgr dhtmgr;
-WebserverMgr webserv(dhtmgr);
 LightcontrolMgr lightmgr(timemgr, settingsmgr, dhtmgr, pconlinemgr);
+WebserverMgr webserv(dhtmgr, timemgr, pconlinemgr, settingsmgr, lightmgr);
 OledMgr oled(128, 64, timemgr, pconlinemgr, dhtmgr, settingsmgr);
 
 // pin modes (input output)

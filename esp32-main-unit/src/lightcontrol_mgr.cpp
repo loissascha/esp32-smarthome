@@ -7,6 +7,10 @@ LightcontrolMgr::LightcontrolMgr(TimeMgr &timemgr, SettingsMgr &settingsmgr,
   tischlampeStatus = false;
 }
 
+bool LightcontrolMgr::getTischlampeStatus() {
+	return tischlampeStatus;
+}
+
 void LightcontrolMgr::setup() {
   turnOffTischlampe();
   tischlampeStatus = false;

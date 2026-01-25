@@ -13,6 +13,7 @@ public:
                   PCOnlineMgr &pconlinemgr);
   void setup();
   void loop();
+	bool getTischlampeStatus();
 
 private:
   TimeMgr &timemgr;
