@@ -19,15 +19,7 @@ func main() {
 		panic("PORT not defined. Make sure there is a .env file or a environment variable set!")
 	}
 
-	s, err := server.NewServer(
-		server.EnableTranslations(),
-		server.EnableAutoDetectLanguage(),
-		server.SetDefaultLanguage("en"),
-		server.AddTranslationFile("en", "src/en.json"),
-		server.AddTranslationFile("de", "src/de.json"),
-		server.AddTranslationFile("es", "src/es.json"),
-		server.AddTranslationFile("fr", "src/fr.json"),
-	)
+	s, err := server.NewServer()
 	if err != nil {
 		panic(err)
 	}

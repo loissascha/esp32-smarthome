@@ -212,9 +212,6 @@
   .grow {
     flex-grow: 1;
   }
-  .cursor-pointer {
-    cursor: pointer;
-  }
   .resize {
     resize: both;
   }
@@ -255,9 +252,6 @@
   }
   .text-neutral-200 {
     color: var(--color-neutral-200);
-  }
-  .underline {
-    text-decoration-line: underline;
   }
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
