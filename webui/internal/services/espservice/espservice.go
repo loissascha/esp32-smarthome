@@ -35,6 +35,57 @@ func (e *ESPService) RunSync() {
 	}
 }
 
+func (e *ESPService) UpdateTischlampeManualStatus(status bool) error {
+	if !e.Sensors.TischlampeManualMode {
+		return fmt.Errorf("Can't do this bro you're in automatic mode!")
+	}
+	client := &http.Client{
+		Timeout: 10 * time.Second,
+	}
+	url := "http://192.168.0.72/tischlampe/manual/"
+	if status {
+		url += "on"
+	} else {
+		url += "off"
+	}
+
+	resp, err := client.Post(url, "application/json", nil)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if status {
+		e.Sensors.TischlampeStatus = true
+	} else {
+		e.Sensors.TischlampeStatus = false
+	}
+	return nil
+}
+
+func (e *ESPService) UpdateTischlampeMode(manual bool) error {
+	client := &http.Client{
+		Timeout: 10 * time.Second,
+	}
+	url := "http://192.168.0.72/tischlampe/mode/"
+	if manual {
+		url += "manual"
+	} else {
+		url += "auto"
+	}
+
+	resp, err := client.Post(url, "application/json", nil)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if manual {
+		e.Sensors.TischlampeManualMode = true
+	} else {
+		e.Sensors.TischlampeManualMode = false
+	}
+	return nil
+}
+
 func (e *ESPService) sync() error {
 	type SensorResponse struct {
 		TempC                float64 `json:"tempC"`

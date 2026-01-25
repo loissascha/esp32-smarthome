@@ -20,17 +20,30 @@ templ HomeInfoComponents(sensors espservice.ESPSensorData) {
 		<div class="text-4xl text-center">Licht</div>
 		<div class="grid grid-cols-3 gap-4">
 			@components.InfoComponent("Tischlampe Modus") {
-				if sensors.TischlampeManualMode {
-					<span>Manuell</span>
-				} else {
-					<span>Automatisch</span>
-				}
+				<div class="flex gap-4 justify-center">
+					{{
+						baseClass := "cursor-pointer "
+						manualClass := baseClass
+						autoClass := baseClass
+						if sensors.TischlampeManualMode {
+							autoClass += "text-neutral-400"
+						} else {
+							manualClass += "text-neutral-400"
+						}
+					}}
+					<a hx-post="/tischlampe/mode/manual" hx-swap="none" class={ manualClass }>Manuell</a>
+					<a hx-post="/tischlampe/mode/auto" hx-swap="none" class={ autoClass }>Automatisch</a>
+				</div>
 			}
 			@components.InfoComponent("Tischlampe Status") {
 				if sensors.TischlampeStatus {
-					<span class="text-green-500">An</span>
+					<button hx-post="/tischlampe/manual/off" hx-swap="none" class="cursor-pointer">
+						<span class="text-green-500">An</span>
+					</button>
 				} else {
-					<span class="text-red-500">Aus</span>
+					<button hx-post="/tischlampe/manual/on" hx-swap="none" class="cursor-pointer">
+						<span class="text-red-500">Aus</span>
+					</button>
 				}
 			}
 		</div>
