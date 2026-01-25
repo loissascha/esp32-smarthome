@@ -1,0 +1,8 @@
+package partials
+
+import "github.com/loissascha/go-templ-template/internal/ui/components"
+
+templ HomeInfoComponents() {
+	@components.InfoComponent("Temperature", "22.70 C")
+	@components.InfoComponent("Humidity", "36.60 %")
+}
