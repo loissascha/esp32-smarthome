@@ -1,10 +1,19 @@
 #include "webserver_mgr.h"
 
-WebserverMgr::WebserverMgr() : server(80) {}
+WebserverMgr::WebserverMgr(DHTMgr &dhtmgr) : server(80), dhtmgr(dhtmgr) {}
 
 void WebserverMgr::handleRoot() {
   String out;
   out += "ESP32 up\n";
+  server.send(200, "text/plain; charset=utf-8", out);
+}
+
+void WebserverMgr::handleSensors() {
+	float temp = dhtmgr.getTempCels();
+	String out = "";
+	out += "{ \"tempC\": ";
+	out += String(temp);
+	out += "}\n";
   server.send(200, "text/plain; charset=utf-8", out);
 }
 
@@ -29,6 +38,7 @@ void WebserverMgr::handlePostMessage() {
 
 void WebserverMgr::setup() {
   server.on("/", HTTP_GET, [this]() { this->handleRoot(); });
+  server.on("/sensors", HTTP_GET, [this]() { this->handleSensors(); });
   server.on("/post", HTTP_POST, [this]() { this->handlePostMessage(); });
   server.onNotFound([this]() { this->handleNotFound(); });
 

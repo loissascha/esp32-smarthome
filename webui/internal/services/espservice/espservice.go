@@ -1,7 +1,6 @@
 package espservice
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -15,6 +14,10 @@ func New() *ESPService {
 func (e *ESPService) RunSync() {
 	for {
 		time.Sleep(10 * time.Second)
-		fmt.Println("Syncing data...")
+		e.sync()
 	}
+}
+
+func (e *ESPService) sync() {
+
 }

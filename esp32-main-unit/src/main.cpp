@@ -18,8 +18,8 @@ SettingsMgr settingsmgr;
 WifiMgr wifimgr;
 TimeMgr timemgr;
 PCOnlineMgr pconlinemgr;
-WebserverMgr webserv;
 DHTMgr dhtmgr;
+WebserverMgr webserv(dhtmgr);
 LightcontrolMgr lightmgr(timemgr, settingsmgr, dhtmgr, pconlinemgr);
 OledMgr oled(128, 64, timemgr, pconlinemgr, dhtmgr, settingsmgr);
 
