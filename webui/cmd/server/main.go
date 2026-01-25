@@ -9,6 +9,7 @@ import (
 	"github.com/loissascha/go-http-server/server"
 	"github.com/loissascha/go-logger/logger"
 	"github.com/loissascha/go-templ-template/internal/handlers/homehandler"
+	"github.com/loissascha/go-templ-template/internal/services/espservice"
 )
 
 func main() {
@@ -23,6 +24,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	// service
+	espS := espservice.New()
+
+	go func() {
+		espS.RunSync()
+	}()
 
 	// handler
 	homeH := homehandler.New(s)
