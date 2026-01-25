@@ -1,0 +1,12 @@
+CompileFlags:
+  Add:
+    - --target=xtensa
+    - -nostdinc
+    - -nostdinc++
+    - -isystem
+    - /home/sascha/.platformio/packages/toolchain-xtensa-esp32/xtensa-esp32-elf/include
+    - -isystem
+    - /home/sascha/.platformio/packages/toolchain-xtensa-esp32/xtensa-esp32-elf/include/c++/8.4.0
+    - -isystem
+    - /home/sascha/.platformio/packages/toolchain-xtensa-esp32/xtensa-esp32-elf/include/c++/8.4.0/xtensa-esp32-elf
+

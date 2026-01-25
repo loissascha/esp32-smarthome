@@ -1,0 +1,2 @@
+:LspStop clangd
+:LspStart ccls

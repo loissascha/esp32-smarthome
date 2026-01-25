@@ -1,0 +1,3 @@
+cat > .ccls <<'EOF'
+%compile_commands.json
+EOF
