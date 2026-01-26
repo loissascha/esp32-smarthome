@@ -62,12 +62,12 @@ templ lightBulbOn() {
 templ TischlampeStatusButton(status bool) {
 	<div class="flex flex-col gap-2 justify-center items-center">
 		if status {
-			<button hx-post="/tischlampe/manual/off" hx-target="#tischlampe-status" hx-swap="innerHTML" class="cursor-pointer">
+			<button hx-post="/tischlampe/manual/off" hx-target="#tischlampe-status" hx-swap="innerHTML" class="cursor-pointer border px-8 py-2 border-neutral-500 rounded-full">
 				@lightBulbOn()
 			</button>
 			<span class="text-sm">An</span>
 		} else {
-			<button hx-post="/tischlampe/manual/on" hx-target="#tischlampe-status" hx-swap="innerHTML" class="cursor-pointer">
+			<button hx-post="/tischlampe/manual/on" hx-target="#tischlampe-status" hx-swap="innerHTML" class="cursor-pointer border px-8 py-2 border-neutral-500 rounded-full">
 				@lightBulbOff()
 			</button>
 			<span class="text-sm">Aus</span>
