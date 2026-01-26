@@ -16,6 +16,10 @@ void WebserverMgr::handleSensors() {
 	bool tischlampeStatus = lightcontrolmgr.getTischlampeStatus();
 	bool isDaytime = timemgr.isDaytime();
 	bool pcOnline = pconlinemgr.getOnlineStatus();
+	int dayStartHour = settingsmgr.daytimeStartHour;
+	int dayStartMinute = settingsmgr.daytimeStartMinute;
+	int dayEndHour = settingsmgr.daytimeEndHour;
+	int dayEndMinute = settingsmgr.daytimeEndMinute;
 	String out = "";
 	out += "{ \"tempC\": ";
 	out += String(temp) + ",";
@@ -24,7 +28,11 @@ void WebserverMgr::handleSensors() {
 	out += " \"tischlampe_manual_mode\": " + String(tischlampeManualMode) + ",";
 	out += " \"tischlampe_status\": " + String(tischlampeStatus) + ",";
 	out += " \"is_daytime\": " + String(isDaytime) + ",";
-	out += " \"pc_online\": " + String(pcOnline);
+	out += " \"pc_online\": " + String(pcOnline) + ",";
+	out += " \"daytime_start_hour\": " + String(dayStartHour) + ",";
+	out += " \"daytime_start_minute\": " + String(dayStartMinute) + ",";
+	out += " \"daytime_end_hour\": " + String(dayEndHour) + ",";
+	out += " \"daytime_end_minute\": " + String(dayEndMinute);
 	out += "}\n";
   server.send(200, "text/plain; charset=utf-8", out);
 }
@@ -46,6 +54,48 @@ void WebserverMgr::handlePostMessage() {
 
   String msg = server.arg("message");
   server.send(200, "text/plain; charset=utf-8", "OK\n");
+}
+
+void WebserverMgr::handleDaytimeStartUpdate() {
+  if (server.method() != HTTP_POST) {
+    server.send(405, "text/plain", "Method not allowed\n");
+    return;
+  }
+
+  if (!server.hasArg("hour")) {
+    server.send(400, "text/plain", "Missing 'hour'\n");
+    return;
+  }
+
+  if (!server.hasArg("minute")) {
+    server.send(400, "text/plain", "Missing 'minute'\n");
+    return;
+  }
+
+  String hour = server.arg("hour");
+  String minute = server.arg("minute");
+	Serial.println("daytime start update: " + hour + ":" + minute);
+}
+
+void WebserverMgr::handleDaytimeEndUpdate() {
+  if (server.method() != HTTP_POST) {
+    server.send(405, "text/plain", "Method not allowed\n");
+    return;
+  }
+
+  if (!server.hasArg("hour")) {
+    server.send(400, "text/plain", "Missing 'hour'\n");
+    return;
+  }
+
+  if (!server.hasArg("minute")) {
+    server.send(400, "text/plain", "Missing 'minute'\n");
+    return;
+  }
+
+  String hour = server.arg("hour");
+  String minute = server.arg("minute");
+	Serial.println("daytime end update: " + hour + ":" + minute);
 }
 
 void WebserverMgr::handleTischlampeModeSwitch(bool manual) {
@@ -81,6 +131,8 @@ void WebserverMgr::setup() {
   server.on("/tischlampe/mode/auto", HTTP_POST, [this]() { this->handleTischlampeModeSwitch(false); });
   server.on("/tischlampe/manual/on", HTTP_POST, [this]() { this->handleTischlampeManualStatusSwitch(true); });
   server.on("/tischlampe/manual/off", HTTP_POST, [this]() { this->handleTischlampeManualStatusSwitch(false); });
+  server.on("/daytime/start/update", HTTP_POST, [this]() { this->handleDaytimeStartUpdate(); });
+  server.on("/daytime/end/update", HTTP_POST, [this]() { this->handleDaytimeEndUpdate(); });
   server.on("/post", HTTP_POST, [this]() { this->handlePostMessage(); });
   server.onNotFound([this]() { this->handleNotFound(); });
 

@@ -27,4 +27,6 @@ private:
 	void handlePostMessage();
 	void handleTischlampeModeSwitch(bool manual);
 	void handleTischlampeManualStatusSwitch(bool status);
+	void handleDaytimeStartUpdate();
+	void handleDaytimeEndUpdate();
 };
