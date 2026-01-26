@@ -3,8 +3,8 @@
 SettingsMgr::SettingsMgr() { 
 	tischlampeManualMode = false;
 	tischlampeManualStatus = false;
-	daytimeStartHour = 0;
-	daytimeStartMinute = 0;
-	daytimeEndHour = 0;
-	daytimeEndMinute = 0;
+	daytimeStartHour = 8;
+	daytimeStartMinute = 30;
+	daytimeEndHour = 16;
+	daytimeEndMinute = 30;
 };
