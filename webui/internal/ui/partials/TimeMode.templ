@@ -1,0 +1,21 @@
+package partials
+
+import "github.com/loissascha/go-templ-template/internal/services/espservice"
+
+templ TimeMode(sensors espservice.ESPSensorData) {
+<div class="grid grid-cols-3">
+	<div>
+		{ sensors.DaytimeStartHour }:{ sensors.DaytimeStartMinute }
+	</div>
+	<div>
+		if sensors.IsDaytime {
+		<span>Tag</span>
+		} else {
+		<span>Nacht</span>
+		}
+	</div>
+	<div>
+		{ sensors.DaytimeEndHour }:{ sensors.DaytimeEndMinute }
+	</div>
+</div>
+}

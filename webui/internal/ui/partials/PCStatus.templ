@@ -1,0 +1,9 @@
+package partials
+
+templ PCStatus(status bool) {
+if status {
+<span class="text-green-500">Online</span>
+} else {
+<span class="text-red-500">Offline</span>
+}
+}
