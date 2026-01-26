@@ -1,13 +1,61 @@
 package partials
 
+templ lightBulbOff() {
+<svg width="120" height="160" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+	<!-- Bulb glass -->
+	<path d="M60 10
+       C30 10 15 35 15 55
+       C15 75 30 90 35 100
+       L35 120
+       H85
+       L85 100
+       C90 90 105 75 105 55
+       C105 35 90 10 60 10 Z" fill="#e5e7eb" stroke="#9ca3af" stroke-width="3"></path>
+	<!-- Filament -->
+	<path d="M45 70 Q60 85 75 70" stroke="#6b7280" stroke-width="3" fill="none"></path>
+	<!-- Base -->
+	<rect x="40" y="120" width="40" height="12" rx="3" fill="#6b7280"></rect>
+	<rect x="42" y="132" width="36" height="10" rx="3" fill="#4b5563"></rect>
+</svg>
+}
+
+templ lightBulbOn() {
+<svg width="120" height="160" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+	<!-- Glow -->
+	<defs>
+		<filter id="glow">
+			<feGaussianBlur stdDeviation="6" result="blur"></feGaussianBlur>
+			<feMerge>
+				<feMergeNode in="blur"></feMergeNode>
+				<feMergeNode in="SourceGraphic"></feMergeNode>
+			</feMerge>
+		</filter>
+	</defs>
+	<!-- Bulb glass -->
+	<path d="M60 10
+       C30 10 15 35 15 55
+       C15 75 30 90 35 100
+       L35 120
+       H85
+       L85 100
+       C90 90 105 75 105 55
+       C105 35 90 10 60 10 Z" fill="#fde68a" stroke="#f59e0b" stroke-width="3" filter="url(#glow)"></path>
+	<!-- Filament (lit) -->
+	<path d="M45 70 Q60 85 75 70" stroke="#f97316" stroke-width="3" fill="none"></path>
+	<!-- Base -->
+	<rect x="40" y="120" width="40" height="12" rx="3" fill="#6b7280"></rect>
+	<rect x="42" y="132" width="36" height="10" rx="3" fill="#4b5563"></rect>
+</svg>
+}
+
 templ TischlampeStatusButton(status bool) {
 if status {
 <button hx-post="/tischlampe/manual/off" hx-target="#tischlampe-status" hx-swap="innerHTML" class="cursor-pointer">
-	<span class="text-green-500">An</span>
+	@lightBulbOn()
 </button>
 } else {
 <button hx-post="/tischlampe/manual/on" hx-target="#tischlampe-status" hx-swap="innerHTML" class="cursor-pointer">
-	<span class="text-red-500">Aus</span>
+	@lightBulbOff()
 </button>
 }
 }

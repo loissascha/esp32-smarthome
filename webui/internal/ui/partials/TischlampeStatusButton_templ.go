@@ -8,7 +8,7 @@ package partials
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func TischlampeStatusButton(status bool) templ.Component {
+func lightBulbOff() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,13 +29,87 @@ func TischlampeStatusButton(status bool) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<svg width=\"120\" height=\"160\" viewBox=\"0 0 120 160\" xmlns=\"http://www.w3.org/2000/svg\"><!-- Bulb glass --><path d=\"M60 10\n       C30 10 15 35 15 55\n       C15 75 30 90 35 100\n       L35 120\n       H85\n       L85 100\n       C90 90 105 75 105 55\n       C105 35 90 10 60 10 Z\" fill=\"#e5e7eb\" stroke=\"#9ca3af\" stroke-width=\"3\"></path><!-- Filament --><path d=\"M45 70 Q60 85 75 70\" stroke=\"#6b7280\" stroke-width=\"3\" fill=\"none\"></path><!-- Base --><rect x=\"40\" y=\"120\" width=\"40\" height=\"12\" rx=\"3\" fill=\"#6b7280\"></rect> <rect x=\"42\" y=\"132\" width=\"36\" height=\"10\" rx=\"3\" fill=\"#4b5563\"></rect></svg>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+func lightBulbOn() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var2 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var2 == nil {
+			templ_7745c5c3_Var2 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<svg width=\"120\" height=\"160\" viewBox=\"0 0 120 160\" xmlns=\"http://www.w3.org/2000/svg\"><!-- Glow --><defs><filter id=\"glow\"><feGaussianBlur stdDeviation=\"6\" result=\"blur\"></feGaussianBlur> <feMerge><feMergeNode in=\"blur\"></feMergeNode> <feMergeNode in=\"SourceGraphic\"></feMergeNode></feMerge></filter></defs><!-- Bulb glass --><path d=\"M60 10\n       C30 10 15 35 15 55\n       C15 75 30 90 35 100\n       L35 120\n       H85\n       L85 100\n       C90 90 105 75 105 55\n       C105 35 90 10 60 10 Z\" fill=\"#fde68a\" stroke=\"#f59e0b\" stroke-width=\"3\" filter=\"url(#glow)\"></path><!-- Filament (lit) --><path d=\"M45 70 Q60 85 75 70\" stroke=\"#f97316\" stroke-width=\"3\" fill=\"none\"></path><!-- Base --><rect x=\"40\" y=\"120\" width=\"40\" height=\"12\" rx=\"3\" fill=\"#6b7280\"></rect> <rect x=\"42\" y=\"132\" width=\"36\" height=\"10\" rx=\"3\" fill=\"#4b5563\"></rect></svg>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+func TischlampeStatusButton(status bool) templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var3 == nil {
+			templ_7745c5c3_Var3 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
 		if status {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<button hx-post=\"/tischlampe/manual/off\" hx-target=\"#tischlampe-status\" hx-swap=\"innerHTML\" class=\"cursor-pointer\"><span class=\"text-green-500\">An</span></button>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<button hx-post=\"/tischlampe/manual/off\" hx-target=\"#tischlampe-status\" hx-swap=\"innerHTML\" class=\"cursor-pointer\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = lightBulbOn().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</button>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		} else {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<button hx-post=\"/tischlampe/manual/on\" hx-target=\"#tischlampe-status\" hx-swap=\"innerHTML\" class=\"cursor-pointer\"><span class=\"text-red-500\">Aus</span></button>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<button hx-post=\"/tischlampe/manual/on\" hx-target=\"#tischlampe-status\" hx-swap=\"innerHTML\" class=\"cursor-pointer\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = lightBulbOff().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</button>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
