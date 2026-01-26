@@ -1,11 +1,14 @@
 package partials
 
-import "github.com/loissascha/go-templ-template/internal/services/espservice"
+import (
+"fmt"
+"github.com/loissascha/go-templ-template/internal/services/espservice"
+)
 
 templ TimeMode(sensors espservice.ESPSensorData) {
 <div class="grid grid-cols-3">
 	<div>
-		{ sensors.DaytimeStartHour }:{ sensors.DaytimeStartMinute }
+		{ fmt.Sprintf("%02d", sensors.DaytimeStartHour) }:{ fmt.Sprintf("%02d", sensors.DaytimeStartMinute) }
 	</div>
 	<div>
 		if sensors.IsDaytime {
@@ -15,7 +18,7 @@ templ TimeMode(sensors espservice.ESPSensorData) {
 		}
 	</div>
 	<div>
-		{ sensors.DaytimeEndHour }:{ sensors.DaytimeEndMinute }
+		{ fmt.Sprintf("%02d", sensors.DaytimeEndHour) }:{ fmt.Sprintf("%02d", sensors.DaytimeEndMinute) }
 	</div>
 </div>
 }
