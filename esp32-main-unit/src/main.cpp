@@ -17,7 +17,7 @@
 
 SettingsMgr settingsmgr;
 WifiMgr wifimgr;
-TimeMgr timemgr;
+TimeMgr timemgr(settingsmgr);
 PCOnlineMgr pconlinemgr;
 DHTMgr dhtmgr;
 LightcontrolMgr lightmgr(timemgr, settingsmgr, dhtmgr, pconlinemgr);

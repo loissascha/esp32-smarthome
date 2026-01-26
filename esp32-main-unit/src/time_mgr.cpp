@@ -1,6 +1,6 @@
 #include "time_mgr.h"
 
-TimeMgr::TimeMgr() {}
+TimeMgr::TimeMgr(SettingsMgr &settingsmgr): settingsmgr(settingsmgr) {}
 
 void TimeMgr::setup() {
   const long gmtOffset_sec = 3600;
@@ -36,5 +36,20 @@ bool TimeMgr::isDaytime() {
     return false;
   }
   int hour = timeinfo.tm_hour;
-  return (hour >= 9 && hour < 17);
+	int minute = timeinfo.tm_minute;
+	// hour matches start hour -> check if minute is in range
+	if (hour == settingsmgr.daytimeStartHour) {
+		if (minute >= settingsmgr.daytimeStartMinute) {
+			return true;
+		}
+		return false;
+	}
+	// hour matches end hour -> check if current minute is before
+	if (hour == settingsmgr.daytimeEndHour) {
+		if (minute <= settingsmgr.daytimeEndMinute) {
+			return true;
+		}
+		return false;
+	}
+	return hour > settingsmgr.daytimeStartHour && hour < settingsmgr.daytimeEndHour;
 }
