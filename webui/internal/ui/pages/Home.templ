@@ -1,11 +1,15 @@
 package pages
 
-import "github.com/loissascha/go-templ-template/internal/ui/layouts"
+import (
+	"github.com/loissascha/go-templ-template/internal/services/espservice"
+	"github.com/loissascha/go-templ-template/internal/ui/layouts"
+	"github.com/loissascha/go-templ-template/internal/ui/partials"
+)
 
-templ Home() {
+templ Home(sensors espservice.ESPSensorData) {
 	@layouts.Layout() {
 		<div class="container mx-auto p-5">
-			<div hx-get="/partials/infos" hx-swap="innerHTML" hx-trigger="every 1s"></div>
+			@partials.HomeInfoComponents(sensors)
 		</div>
 	}
 }

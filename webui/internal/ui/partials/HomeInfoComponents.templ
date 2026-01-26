@@ -4,75 +4,75 @@ import "github.com/loissascha/go-templ-template/internal/ui/components"
 import "github.com/loissascha/go-templ-template/internal/services/espservice"
 
 templ HomeInfoComponents(sensors espservice.ESPSensorData) {
-	<div class="flex flex-col gap-4">
-		<div class="text-4xl text-center">Sensoren</div>
-		<div class="grid grid-cols-3 gap-4">
-			@components.InfoComponent("Temperatur") {
-				<span>{ sensors.TempC } C</span>
-			}
-			@components.InfoComponent("Luftfeuchtigkeit") {
-				<span>{ sensors.Humidity } %</span>
-			}
-			@components.InfoComponent("Lärmpegel") {
-				<span>{ sensors.VoiceLevel } dB</span>
-			}
-		</div>
-		<div class="text-4xl text-center">Licht</div>
-		<div class="grid grid-cols-3 gap-4">
-			@components.InfoComponent("Tischlampe Modus") {
-				<div class="flex gap-4 justify-center">
-					{{
-						baseClass := "cursor-pointer "
-						manualClass := baseClass
-						autoClass := baseClass
-						if sensors.TischlampeManualMode {
-							autoClass += "text-neutral-400"
-						} else {
-							manualClass += "text-neutral-400"
-						}
-					}}
-					<a hx-post="/tischlampe/mode/manual" hx-swap="none" class={ manualClass }>Manuell</a>
-					<a hx-post="/tischlampe/mode/auto" hx-swap="none" class={ autoClass }>Automatisch</a>
-				</div>
-			}
-			@components.InfoComponent("Tischlampe Status") {
-				if sensors.TischlampeStatus {
-					<button hx-post="/tischlampe/manual/off" hx-swap="none" class="cursor-pointer">
-						<span class="text-green-500">An</span>
-					</button>
-				} else {
-					<button hx-post="/tischlampe/manual/on" hx-swap="none" class="cursor-pointer">
-						<span class="text-red-500">Aus</span>
-					</button>
-				}
-			}
-		</div>
-		<div class="text-4xl text-center">Status</div>
-		<div class="grid grid-cols-3 gap-4">
-			@components.InfoComponent("Zeitmodus") {
-				<div class="grid grid-cols-3">
-					<div>
-						{ sensors.DaytimeStartHour }:{ sensors.DaytimeStartMinute }
-					</div>
-					<div>
-						if sensors.IsDaytime {
-							<span>Tag</span>
-						} else {
-							<span>Nacht</span>
-						}
-					</div>
-					<div>
-						{ sensors.DaytimeEndHour }:{ sensors.DaytimeEndMinute }
-					</div>
-				</div>
-			}
-			@components.InfoComponent("PC") {
-				if sensors.PCOnline {
-					<span class="text-green-500">Online</span>
-				} else {
-					<span class="text-red-500">Offline</span>
-				}
-			}
-		</div>
+<div class="flex flex-col gap-4">
+	<div class="text-4xl text-center">Sensoren</div>
+	<div class="grid grid-cols-3 gap-4">
+		@components.InfoComponent("Temperatur") {
+		<span><span hx-get="/partials/components/temp" hx-swap="innerHTML" hx-trigger="every 1s"></span> C</span>
+		}
+		@components.InfoComponent("Luftfeuchtigkeit") {
+		<span><span hx-get="/partials/components/humidity" hx-swap="innerHTML" hx-trigger="every 1s"></span> %</span>
+		}
+		@components.InfoComponent("Lärmpegel") {
+		<span>{ sensors.VoiceLevel } dB</span>
+		}
 	</div>
+	<div class="text-4xl text-center">Licht</div>
+	<div class="grid grid-cols-3 gap-4">
+		@components.InfoComponent("Tischlampe Modus") {
+		<div class="flex gap-4 justify-center">
+			{{
+			baseClass := "cursor-pointer "
+			manualClass := baseClass
+			autoClass := baseClass
+			if sensors.TischlampeManualMode {
+			autoClass += "text-neutral-400"
+			} else {
+			manualClass += "text-neutral-400"
+			}
+			}}
+			<a hx-post="/tischlampe/mode/manual" hx-swap="none" class={ manualClass }>Manuell</a>
+			<a hx-post="/tischlampe/mode/auto" hx-swap="none" class={ autoClass }>Automatisch</a>
+		</div>
+		}
+		@components.InfoComponent("Tischlampe Status") {
+		if sensors.TischlampeStatus {
+		<button hx-post="/tischlampe/manual/off" hx-swap="none" class="cursor-pointer">
+			<span class="text-green-500">An</span>
+		</button>
+		} else {
+		<button hx-post="/tischlampe/manual/on" hx-swap="none" class="cursor-pointer">
+			<span class="text-red-500">Aus</span>
+		</button>
+		}
+		}
+	</div>
+	<div class="text-4xl text-center">Status</div>
+	<div class="grid grid-cols-3 gap-4">
+		@components.InfoComponent("Zeitmodus") {
+		<div class="grid grid-cols-3">
+			<div>
+				{ sensors.DaytimeStartHour }:{ sensors.DaytimeStartMinute }
+			</div>
+			<div>
+				if sensors.IsDaytime {
+				<span>Tag</span>
+				} else {
+				<span>Nacht</span>
+				}
+			</div>
+			<div>
+				{ sensors.DaytimeEndHour }:{ sensors.DaytimeEndMinute }
+			</div>
+		</div>
+		}
+		@components.InfoComponent("PC") {
+		if sensors.PCOnline {
+		<span class="text-green-500">Online</span>
+		} else {
+		<span class="text-red-500">Offline</span>
+		}
+		}
+	</div>
+</div>
 }

@@ -25,8 +25,24 @@ func New(s *server.Server, esps *espservice.ESPService) *HomeHandler {
 func (h *HomeHandler) RegisterHandlers(s *server.Server) {
 	s.GET("/", h.homeRoute)
 	s.GET("/partials/infos", h.partialsInfos)
+	s.GET("/partials/components/{component}", h.handleComponent)
 	s.POST("/tischlampe/mode/{mode}", h.tischlampeMode)
 	s.POST("/tischlampe/manual/{status}", h.tischlampeManualStatus)
+}
+
+func (h *HomeHandler) handleComponent(w http.ResponseWriter, r *http.Request) {
+	component := r.PathValue("component")
+
+	switch component {
+	case "temp":
+		fmt.Fprintf(w, "%.2f", h.espserv.Sensors.TempC)
+	case "humidity":
+		fmt.Fprintf(w, "%.2f", h.espserv.Sensors.Humidity)
+	case "voice":
+		fmt.Fprintf(w, "%.0f", h.espserv.Sensors.VoiceLevel)
+	default:
+		partials.Error("Unknown component").Render(r.Context(), w)
+	}
 }
 
 func (h *HomeHandler) tischlampeManualStatus(w http.ResponseWriter, r *http.Request) {
@@ -54,6 +70,6 @@ func (h *HomeHandler) partialsInfos(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *HomeHandler) homeRoute(w http.ResponseWriter, r *http.Request) {
-	homeComponent := pages.Home()
+	homeComponent := pages.Home(h.espserv.Sensors)
 	homeComponent.Render(r.Context(), w)
 }
