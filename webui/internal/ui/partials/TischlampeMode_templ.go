@@ -38,8 +38,10 @@ func TischlampeMode(manualMode bool) templ.Component {
 		autoClass := baseClass
 		if manualMode {
 			autoClass += "text-neutral-400"
+			manualClass += "font-semibold"
 		} else {
 			manualClass += "text-neutral-400"
+			autoClass += "font-semibold"
 		}
 		var templ_7745c5c3_Var2 = []any{manualClass}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)

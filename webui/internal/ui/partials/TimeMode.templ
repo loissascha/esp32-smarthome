@@ -46,11 +46,11 @@ templ TimeMode(sensors espservice.ESPSensorData) {
 	</div>
 	<div class="mt-4 text-xl">
 		<div>
-			<strong>Aktuell:</strong>
+			<span>Aktuell:</span>
 			if sensors.IsDaytime {
-				<span>Tag</span>
+				<strong>Tag</strong>
 			} else {
-				<span>Nacht</span>
+				<strong>Nacht</strong>
 			}
 		</div>
 	</div>
