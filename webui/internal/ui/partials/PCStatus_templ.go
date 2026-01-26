@@ -8,7 +8,7 @@ package partials
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func PCStatus(status bool) templ.Component {
+func pcOff() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,16 +29,98 @@ func PCStatus(status bool) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<svg width=\"60\" height=\"100\" viewBox=\"0 0 120 160\" xmlns=\"http://www.w3.org/2000/svg\"><!-- Monitor frame --><rect x=\"15\" y=\"22\" width=\"90\" height=\"70\" rx=\"10\" fill=\"#374151\" stroke=\"#111827\" stroke-width=\"3\"></rect><!-- Screen (off) --><rect x=\"22\" y=\"29\" width=\"76\" height=\"56\" rx=\"7\" fill=\"#111827\"></rect><!-- Tiny power LED (off) --><circle cx=\"96\" cy=\"88\" r=\"3\" fill=\"#4b5563\"></circle><!-- Stand neck --><rect x=\"54\" y=\"92\" width=\"12\" height=\"22\" rx=\"4\" fill=\"#4b5563\"></rect><!-- Stand base --><path d=\"M35 118\n           C45 106 75 106 85 118\n           L85 124\n           C75 132 45 132 35 124 Z\" fill=\"#6b7280\"></path><!-- Keyboard --><rect x=\"20\" y=\"132\" width=\"80\" height=\"16\" rx=\"6\" fill=\"#4b5563\"></rect><!-- Key hints --><path d=\"M26 140 H94\" stroke=\"#6b7280\" stroke-width=\"2\" opacity=\"0.6\"></path> <path d=\"M30 136 H90\" stroke=\"#6b7280\" stroke-width=\"2\" opacity=\"0.35\"></path></svg>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+func pcOn() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var2 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var2 == nil {
+			templ_7745c5c3_Var2 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<svg width=\"60\" height=\"100\" viewBox=\"0 0 120 160\" xmlns=\"http://www.w3.org/2000/svg\"><defs><filter id=\"screenGlow\"><feGaussianBlur stdDeviation=\"5\" result=\"blur\"></feGaussianBlur> <feMerge><feMergeNode in=\"blur\"></feMergeNode> <feMergeNode in=\"SourceGraphic\"></feMergeNode></feMerge></filter><!-- Soft gradient for the screen --><linearGradient id=\"screenGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0%\" stop-color=\"#60a5fa\"></stop> <stop offset=\"100%\" stop-color=\"#22c55e\"></stop></linearGradient></defs><!-- Monitor frame --><rect x=\"15\" y=\"22\" width=\"90\" height=\"70\" rx=\"10\" fill=\"#374151\" stroke=\"#111827\" stroke-width=\"3\"></rect><!-- Screen (on) --><rect x=\"22\" y=\"29\" width=\"76\" height=\"56\" rx=\"7\" fill=\"url(#screenGrad)\" filter=\"url(#screenGlow)\"></rect><!-- Simple UI lines --><path d=\"M30 45 H82\" stroke=\"#e5e7eb\" stroke-width=\"3\" opacity=\"0.9\"></path> <path d=\"M30 56 H72\" stroke=\"#e5e7eb\" stroke-width=\"3\" opacity=\"0.7\"></path> <path d=\"M30 67 H78\" stroke=\"#e5e7eb\" stroke-width=\"3\" opacity=\"0.55\"></path><!-- Power LED (on) --><circle cx=\"96\" cy=\"88\" r=\"3\" fill=\"#22c55e\"></circle><!-- Stand neck --><rect x=\"54\" y=\"92\" width=\"12\" height=\"22\" rx=\"4\" fill=\"#4b5563\"></rect><!-- Stand base --><path d=\"M35 118\n           C45 106 75 106 85 118\n           L85 124\n           C75 132 45 132 35 124 Z\" fill=\"#6b7280\"></path><!-- Keyboard --><rect x=\"20\" y=\"132\" width=\"80\" height=\"16\" rx=\"6\" fill=\"#4b5563\"></rect><!-- Key hints --><path d=\"M26 140 H94\" stroke=\"#6b7280\" stroke-width=\"2\" opacity=\"0.6\"></path> <path d=\"M30 136 H90\" stroke=\"#6b7280\" stroke-width=\"2\" opacity=\"0.35\"></path></svg>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+func PCStatus(status bool) templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var3 == nil {
+			templ_7745c5c3_Var3 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"flex items-center justify-center\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
 		if status {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<span class=\"text-green-500\">Online</span>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<div class=\"flex flex-col gap-2 justify-center items-center\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = pcOn().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<div class=\"text-center text-sm\">Online</div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		} else {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<span class=\"text-red-500\">Offline</span>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<div class=\"flex flex-col gap-2 justify-center items-center\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
+			templ_7745c5c3_Err = pcOff().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<div class=\"text-center text-sm\">Offline</div></div>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
 		}
 		return nil
 	})
