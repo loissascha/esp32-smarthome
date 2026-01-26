@@ -15,6 +15,10 @@ type ESPSensorData struct {
 	TischlampeStatus     bool
 	IsDaytime            bool
 	PCOnline             bool
+	DaytimeStartHour     int
+	DaytimeStartMinute   int
+	DaytimeEndHour       int
+	DaytimeEndMinute     int
 }
 
 type ESPService struct {
@@ -95,6 +99,10 @@ func (e *ESPService) sync() error {
 		TischlampeStatus     int     `json:"tischlampe_status"`
 		IsDaytime            int     `json:"is_daytime"`
 		PCOnline             int     `json:"pc_online"`
+		DaytimeStartHour     int     `json:"daytime_start_hour"`
+		DaytimeStartMinute   int     `json:"daytime_start_minute"`
+		DaytimeEndHour       int     `json:"daytime_end_hour"`
+		DaytimeEndMinute     int     `json:"daytime_end_minute"`
 	}
 
 	client := &http.Client{
@@ -121,6 +129,10 @@ func (e *ESPService) sync() error {
 	e.Sensors.TempC = result.TempC
 	e.Sensors.Humidity = result.Humidity
 	e.Sensors.VoiceLevel = result.VoiceLevel
+	e.Sensors.DaytimeStartHour = result.DaytimeStartHour
+	e.Sensors.DaytimeStartMinute = result.DaytimeStartMinute
+	e.Sensors.DaytimeEndHour = result.DaytimeEndHour
+	e.Sensors.DaytimeEndMinute = result.DaytimeEndMinute
 
 	if result.TischlampeManualMode == 1 {
 		e.Sensors.TischlampeManualMode = true

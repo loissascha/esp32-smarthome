@@ -50,11 +50,21 @@ templ HomeInfoComponents(sensors espservice.ESPSensorData) {
 		<div class="text-4xl text-center">Status</div>
 		<div class="grid grid-cols-3 gap-4">
 			@components.InfoComponent("Zeitmodus") {
-				if sensors.IsDaytime {
-					<span>Tag</span>
-				} else {
-					<span>Nacht</span>
-				}
+				<div class="grid grid-cols-3">
+					<div>
+						{ sensors.DaytimeStartHour }:{ sensors.DaytimeStartMinute }
+					</div>
+					<div>
+						if sensors.IsDaytime {
+							<span>Tag</span>
+						} else {
+							<span>Nacht</span>
+						}
+					</div>
+					<div>
+						{ sensors.DaytimeEndHour }:{ sensors.DaytimeEndMinute }
+					</div>
+				</div>
 			}
 			@components.InfoComponent("PC") {
 				if sensors.PCOnline {
