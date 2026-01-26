@@ -36,7 +36,7 @@ bool TimeMgr::isDaytime() {
     return false;
   }
   int hour = timeinfo.tm_hour;
-	int minute = timeinfo.tm_minute;
+	int minute = timeinfo.tm_min;
 	// hour matches start hour -> check if minute is in range
 	if (hour == settingsmgr.daytimeStartHour) {
 		if (minute >= settingsmgr.daytimeStartMinute) {
