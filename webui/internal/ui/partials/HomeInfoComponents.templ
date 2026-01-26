@@ -8,11 +8,11 @@ templ HomeInfoComponents(sensors espservice.ESPSensorData) {
 	<div class="text-4xl text-center">Sensoren</div>
 	<div class="grid grid-cols-3 gap-4">
 		@components.InfoComponent("Temperatur") {
-		<span><span hx-get="/partials/components/temp" hx-swap="innerHTML" hx-trigger="load, every 1s"></span> C</span>
+		<span><span hx-get="/partials/components/temp" hx-swap="innerHTML" hx-trigger="load, every 10s"></span> C</span>
 		}
 		@components.InfoComponent("Luftfeuchtigkeit") {
 		<span>
-			<span hx-get="/partials/components/humidity" hx-swap="innerHTML" hx-trigger="load, every 1s"></span>
+			<span hx-get="/partials/components/humidity" hx-swap="innerHTML" hx-trigger="load, every 10s"></span>
 			%
 		</span>
 		}
@@ -26,23 +26,12 @@ templ HomeInfoComponents(sensors espservice.ESPSensorData) {
 	<div class="text-4xl text-center">Licht</div>
 	<div class="grid grid-cols-3 gap-4">
 		@components.InfoComponent("Tischlampe Modus") {
-		<div class="flex gap-4 justify-center">
-			{{
-			baseClass := "cursor-pointer "
-			manualClass := baseClass
-			autoClass := baseClass
-			if sensors.TischlampeManualMode {
-			autoClass += "text-neutral-400"
-			} else {
-			manualClass += "text-neutral-400"
-			}
-			}}
-			<a hx-post="/tischlampe/mode/manual" class={ manualClass }>Manuell</a>
-			<a hx-post="/tischlampe/mode/auto" class={ autoClass }>Automatisch</a>
+		<div id="tischlampe-mode" hx-get="/partials/components/tischlampemode" hx-swap="innerHTML" hx-trigger="load">
 		</div>
 		}
 		@components.InfoComponent("Tischlampe Status") {
-		<div hx-get="/partials/components/tischlampestatus" hx-swap="innerHTML" hx-trigger="load, every 1s"></div>
+		<div id="tischlampe-status" hx-get="/partials/components/tischlampestatus" hx-swap="innerHTML"
+			hx-trigger="load, every 1s"></div>
 		}
 	</div>
 	<div class="text-4xl text-center">Status</div>
@@ -51,7 +40,7 @@ templ HomeInfoComponents(sensors espservice.ESPSensorData) {
 		<div hx-get="/partials/components/timemode" hx-swap="innerHTML" hx-trigger="load, every 1s"></div>
 		}
 		@components.InfoComponent("PC") {
-		<div hx-get="/partials/components/pcstatus" hx-swap="innerHTML" hx-trigger="load, every 1s"></div>
+		<div hx-get="/partials/components/pcstatus" hx-swap="innerHTML" hx-trigger="load, every 10s"></div>
 		}
 	</div>
 </div>

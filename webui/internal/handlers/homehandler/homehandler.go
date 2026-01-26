@@ -42,6 +42,8 @@ func (h *HomeHandler) handleComponent(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "%.0f", h.espserv.Sensors.VoiceLevel)
 	case "tischlampestatus":
 		partials.TischlampeStatusButton(h.espserv.Sensors.TischlampeStatus).Render(r.Context(), w)
+	case "tischlampemode":
+		partials.TischlampeMode(h.espserv.Sensors.TischlampeManualMode).Render(r.Context(), w)
 	case "pcstatus":
 		partials.PCStatus(h.espserv.Sensors.PCOnline).Render(r.Context(), w)
 	case "timemode":
@@ -59,8 +61,7 @@ func (h *HomeHandler) tischlampeManualStatus(w http.ResponseWriter, r *http.Requ
 	} else {
 		h.espserv.UpdateTischlampeManualStatus(false)
 	}
-	w.Header().Set("HX-Refresh", "true")
-	w.WriteHeader(http.StatusOK)
+	partials.TischlampeStatusButton(h.espserv.Sensors.TischlampeStatus).Render(r.Context(), w)
 }
 
 func (h *HomeHandler) tischlampeMode(w http.ResponseWriter, r *http.Request) {
@@ -71,8 +72,7 @@ func (h *HomeHandler) tischlampeMode(w http.ResponseWriter, r *http.Request) {
 	} else {
 		h.espserv.UpdateTischlampeMode(false)
 	}
-	w.Header().Set("HX-Refresh", "true")
-	w.WriteHeader(http.StatusOK)
+	partials.TischlampeMode(h.espserv.Sensors.TischlampeManualMode).Render(r.Context(), w)
 }
 
 func (h *HomeHandler) partialsInfos(w http.ResponseWriter, r *http.Request) {

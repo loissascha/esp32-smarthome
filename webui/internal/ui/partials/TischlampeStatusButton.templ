@@ -2,11 +2,11 @@ package partials
 
 templ TischlampeStatusButton(status bool) {
 if status {
-<button hx-post="/tischlampe/manual/off" hx-swap="none" class="cursor-pointer">
+<button hx-post="/tischlampe/manual/off" hx-target="#tischlampe-status" hx-swap="innerHTML" class="cursor-pointer">
 	<span class="text-green-500">An</span>
 </button>
 } else {
-<button hx-post="/tischlampe/manual/on" hx-swap="none" class="cursor-pointer">
+<button hx-post="/tischlampe/manual/on" hx-target="#tischlampe-status" hx-swap="innerHTML" class="cursor-pointer">
 	<span class="text-red-500">Aus</span>
 </button>
 }
