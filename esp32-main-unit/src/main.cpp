@@ -14,6 +14,7 @@
 // LEDs
 #define LED_GREEN 23
 
+
 SettingsMgr settingsmgr;
 WifiMgr wifimgr;
 TimeMgr timemgr;
@@ -23,8 +24,15 @@ LightcontrolMgr lightmgr(timemgr, settingsmgr, dhtmgr, pconlinemgr);
 WebserverMgr webserv(dhtmgr, timemgr, pconlinemgr, settingsmgr, lightmgr);
 OledMgr oled(128, 64, timemgr, pconlinemgr, dhtmgr, settingsmgr);
 
+// Mic stuff
+#define MIC_PIN 27
+static const bool activeLow = true;
+
 // pin modes (input output)
-void setPinModes() { pinMode(LED_GREEN, OUTPUT); }
+void setPinModes() { 
+	pinMode(LED_GREEN, OUTPUT);
+	pinMode(MIC_PIN, INPUT);
+}
 
 void setup() {
   Serial.begin(115200);
@@ -60,4 +68,9 @@ void loop() {
     return;
   }
   digitalWrite(LED_GREEN, HIGH);
+
+	int sound = digitalRead(MIC_PIN);
+	if (sound == LOW) {
+		Serial.println("sound");
+	}
 }
