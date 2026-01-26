@@ -92,7 +92,7 @@ func TischlampeStatusButton(status bool) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if status {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<button hx-post=\"/tischlampe/manual/off\" hx-target=\"#tischlampe-status\" hx-swap=\"innerHTML\" class=\"cursor-pointer border px-8 py-2 border-neutral-500 rounded-full\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<button hx-post=\"/tischlampe/manual/off\" hx-target=\"#tischlampe-status\" hx-swap=\"innerHTML\" class=\"cursor-pointer\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -105,7 +105,7 @@ func TischlampeStatusButton(status bool) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		} else {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<button hx-post=\"/tischlampe/manual/on\" hx-target=\"#tischlampe-status\" hx-swap=\"innerHTML\" class=\"cursor-pointer border px-8 py-2 border-neutral-500 rounded-full\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<button hx-post=\"/tischlampe/manual/on\" hx-target=\"#tischlampe-status\" hx-swap=\"innerHTML\" class=\"cursor-pointer\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

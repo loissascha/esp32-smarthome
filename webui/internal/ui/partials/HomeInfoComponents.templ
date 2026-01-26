@@ -26,7 +26,7 @@ templ HomeInfoComponents(sensors espservice.ESPSensorData) {
 			}
 		</div>
 		<div class="grid grid-cols-3 gap-4">
-			@components.InfoComponent("Tischlampe Modus") {
+			@components.InfoComponent("Modus") {
 				<div
 					class="grow"
 					id="tischlampe-mode"
@@ -35,7 +35,7 @@ templ HomeInfoComponents(sensors espservice.ESPSensorData) {
 					hx-trigger="load"
 				></div>
 			}
-			@components.InfoComponent("Tischlampe Status") {
+			@components.InfoComponent("Licht") {
 				<div
 					id="tischlampe-status"
 					hx-get="/partials/components/tischlampestatus"
