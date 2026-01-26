@@ -5,7 +5,6 @@ import "github.com/loissascha/go-templ-template/internal/services/espservice"
 
 templ HomeInfoComponents(sensors espservice.ESPSensorData) {
 <div class="flex flex-col gap-4">
-	<div class="text-4xl text-center">Sensoren</div>
 	<div class="grid grid-cols-3 gap-4">
 		@components.InfoComponent("Temperatur") {
 		<span><span hx-get="/partials/components/temp" hx-swap="innerHTML" hx-trigger="load, every 10s"></span> C</span>
@@ -23,7 +22,6 @@ templ HomeInfoComponents(sensors espservice.ESPSensorData) {
 		</span>
 		}
 	</div>
-	<div class="text-4xl text-center">Licht</div>
 	<div class="grid grid-cols-3 gap-4">
 		@components.InfoComponent("Tischlampe Modus") {
 		<div id="tischlampe-mode" hx-get="/partials/components/tischlampemode" hx-swap="innerHTML" hx-trigger="load">
@@ -33,14 +31,13 @@ templ HomeInfoComponents(sensors espservice.ESPSensorData) {
 		<div id="tischlampe-status" hx-get="/partials/components/tischlampestatus" hx-swap="innerHTML"
 			hx-trigger="load, every 1s"></div>
 		}
-	</div>
-	<div class="text-4xl text-center">Status</div>
-	<div class="grid grid-cols-3 gap-4">
-		@components.InfoComponent("Zeitmodus") {
-		<div hx-get="/partials/components/timemode" hx-swap="innerHTML" hx-trigger="load, every 1s"></div>
-		}
 		@components.InfoComponent("PC") {
 		<div hx-get="/partials/components/pcstatus" hx-swap="innerHTML" hx-trigger="load, every 10s"></div>
+		}
+	</div>
+	<div class="grid grid-cols-3 gap-4">
+		@components.InfoComponent("Zeit Einstellungen") {
+		<div hx-get="/partials/components/timemode" hx-swap="innerHTML" hx-trigger="load, every 1s"></div>
 		}
 	</div>
 </div>
