@@ -1,20 +1,32 @@
 package partials
 
 templ TischlampeMode(manualMode bool) {
-<div class="flex gap-4 justify-center">
-	{{
-	baseClass := "cursor-pointer "
-	manualClass := baseClass
-	autoClass := baseClass
-	if manualMode {
-	autoClass += "text-neutral-400"
-	} else {
-	manualClass += "text-neutral-400"
-	}
-	}}
-	<a hx-post="/tischlampe/mode/manual" hx-target="#tischlampe-mode" hx-swap="innerHTML" class={ manualClass
-		}>Manuell</a>
-	<a hx-post="/tischlampe/mode/auto" hx-target="#tischlampe-mode" hx-swap="innerHTML" class={ autoClass
-		}>Automatisch</a>
-</div>
+	<div class="flex flex-col h-full grow">
+		<div class="grow"></div>
+		<div class="flex gap-4 justify-center items-center align-bottom">
+			{{
+				baseClass := "cursor-pointer "
+				manualClass := baseClass
+				autoClass := baseClass
+				if manualMode {
+					autoClass += "text-neutral-400"
+				} else {
+					manualClass += "text-neutral-400"
+				}
+			}}
+			<a
+				hx-post="/tischlampe/mode/manual"
+				hx-target="#tischlampe-mode"
+				hx-swap="innerHTML"
+				class={ manualClass }
+			>Manuell</a>
+			<a
+				hx-post="/tischlampe/mode/auto"
+				hx-target="#tischlampe-mode"
+				hx-swap="innerHTML"
+				class={ autoClass }
+			>Automatisch</a>
+		</div>
+		<div class="grow"></div>
+	</div>
 }

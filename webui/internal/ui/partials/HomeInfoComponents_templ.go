@@ -118,7 +118,7 @@ func HomeInfoComponents(sensors espservice.ESPSensorData) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<div id=\"tischlampe-mode\" hx-get=\"/partials/components/tischlampemode\" hx-swap=\"innerHTML\" hx-trigger=\"load\"></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<div class=\"grow\" id=\"tischlampe-mode\" hx-get=\"/partials/components/tischlampemode\" hx-swap=\"innerHTML\" hx-trigger=\"load\"></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
