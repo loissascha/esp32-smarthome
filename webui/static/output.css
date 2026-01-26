@@ -11,6 +11,7 @@
     --color-red-500: oklch(63.7% 0.237 25.331);
     --color-neutral-200: oklch(92.2% 0 0);
     --color-neutral-400: oklch(70.8% 0 0);
+    --color-neutral-500: oklch(55.6% 0 0);
     --color-neutral-600: oklch(43.9% 0 0);
     --color-neutral-900: oklch(20.5% 0 0);
     --spacing: 0.25rem;
@@ -215,9 +216,9 @@
   .grid {
     display: grid;
   }
-  .size-6 {
-    width: calc(var(--spacing) * 6);
-    height: calc(var(--spacing) * 6);
+  .size-5 {
+    width: calc(var(--spacing) * 5);
+    height: calc(var(--spacing) * 5);
   }
   .h-full {
     height: 100%;

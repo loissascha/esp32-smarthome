@@ -1,44 +1,57 @@
 package partials
 
 import (
-"fmt"
-"github.com/loissascha/go-templ-template/internal/services/espservice"
+	"fmt"
+	"github.com/loissascha/go-templ-template/internal/services/espservice"
 )
 
 templ pencil() {
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-	class="size-6">
-	<path stroke-linecap="round" stroke-linejoin="round"
-		d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125">
-	</path>
-</svg>
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		fill="none"
+		viewBox="0 0 24 24"
+		stroke-width="1.5"
+		stroke="currentColor"
+		class="size-5"
+	>
+		<path
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
+		></path>
+	</svg>
 }
 
 templ TimeMode(sensors espservice.ESPSensorData) {
-<div>
-	Tageszeit
-</div>
-<div class="grid grid-cols-2">
-	<div>von</div>
-	<div>bis</div>
-	<div class="flex items-center justify-center gap-2">
-		{ fmt.Sprintf("%02d", sensors.DaytimeStartHour) }:{ fmt.Sprintf("%02d", sensors.DaytimeStartMinute) }
-		<a>
-			@pencil()
-		</a>
-	</div>
 	<div>
-		{ fmt.Sprintf("%02d", sensors.DaytimeEndHour) }:{ fmt.Sprintf("%02d", sensors.DaytimeEndMinute) }
+		Tageszeit
 	</div>
-</div>
-<div class="mt-4 text-xl">
-	<div>
-		<strong>Aktuell:</strong>
-		if sensors.IsDaytime {
-		<span>Tag</span>
-		} else {
-		<span>Nacht</span>
-		}
+	<div class="grid grid-cols-2">
+		<div>von</div>
+		<div>bis</div>
+		<div class="flex items-center justify-center gap-2">
+			{ fmt.Sprintf("%02d", sensors.DaytimeStartHour) }:{ fmt.Sprintf("%02d", sensors.DaytimeStartMinute) }
+			<a class="text-neutral-200 cursor-pointer">
+				@pencil()
+			</a>
+		</div>
+		<div>
+			<div class="flex items-center justify-center gap-2">
+				{ fmt.Sprintf("%02d", sensors.DaytimeEndHour) }:{ fmt.Sprintf("%02d", sensors.DaytimeEndMinute) }
+				<a class="text-neutral-200 cursor-pointer">
+					@pencil()
+				</a>
+			</div>
+		</div>
 	</div>
-</div>
+	<div class="mt-4 text-xl">
+		<div>
+			<strong>Aktuell:</strong>
+			if sensors.IsDaytime {
+				<span>Tag</span>
+			} else {
+				<span>Nacht</span>
+			}
+		</div>
+	</div>
 }
