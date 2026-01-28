@@ -1,6 +1,6 @@
 package partials
 
-templ TempGauge(temp float64, percent int) {
+templ HumidityGauge(humidity float64, percent int) {
 	<div class="relative w-64">
 		<svg class="block w-full h-auto" viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -27,9 +27,9 @@ templ TempGauge(temp float64, percent int) {
 		<div class="absolute inset-0 flex items-end justify-center pb-4">
 			<div class="text-center">
 				<div class="text-3xl font-semibold leading-none">
-					{ temp } °C
+					{ humidity } %
 				</div>
-				<div class="text-sm text-gray-500">Target: 24.00 °C</div>
+				<div class="text-sm text-gray-500">Luftfeuchtigkeit</div>
 			</div>
 		</div>
 	</div>

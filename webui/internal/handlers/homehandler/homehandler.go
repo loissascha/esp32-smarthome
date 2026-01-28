@@ -22,6 +22,25 @@ func New(s *server.Server, esps *espservice.ESPService) *HomeHandler {
 	}
 }
 
+func percent(start, end int, value float64) int {
+	// avoid division by zero
+	if start == end {
+		return 0
+	}
+
+	p := (value - float64(start)) / float64(end-start) * 100
+
+	// clamp to [0, 100]
+	if p < 0 {
+		p = 0
+	}
+	if p > 100 {
+		p = 100
+	}
+
+	return int(p)
+}
+
 func (h *HomeHandler) RegisterHandlers(s *server.Server) {
 	s.GET("/", h.homeRoute)
 	s.GET("/dashboard", h.dashboardRoute)
@@ -37,9 +56,11 @@ func (h *HomeHandler) handleComponent(w http.ResponseWriter, r *http.Request) {
 
 	switch component {
 	case "temp":
-		partials.TempGauge(h.espserv.Sensors.TempC).Render(r.Context(), w)
+		p := percent(15, 35, h.espserv.Sensors.TempC)
+		partials.TempGauge(h.espserv.Sensors.TempC, p).Render(r.Context(), w)
 	case "humidity":
-		fmt.Fprintf(w, "%.2f", h.espserv.Sensors.Humidity)
+		p := percent(0, 100, h.espserv.Sensors.Humidity)
+		partials.HumidityGauge(h.espserv.Sensors.Humidity, p).Render(r.Context(), w)
 	case "voice":
 		fmt.Fprintf(w, "%.0f", h.espserv.Sensors.VoiceLevel)
 	case "tischlampestatus":
