@@ -1,12 +1,18 @@
 package layouts
 
-templ navItem(href string) {
-	<a href={ href } class="cursor-pointer select-none bg-neutral-800 p-4">
+templ navItem(href string, active bool) {
+{{
+activeClass := "bg-neutral-800"
+if active {
+activeClass = "bg-neutral-700"
+}
+}}
+	<a href={ href } class={"cursor-pointer select-none p-4 " + activeClass}>
 		{ children... }
 	</a>
 }
 
-templ LayoutNew() {
+templ LayoutNew(activeMenu string) {
 	<!DOCTYPE html>
 	<html lang="de">
 		<head>
@@ -17,16 +23,16 @@ templ LayoutNew() {
 		<body class="bg-neutral-900 text-neutral-200">
 			<div class="flex flex-col min-w-dvw min-h-dvh">
 				<nav class="flex justify-center items-center gap-4 border-b border-neutral-700">
-					@navItem("/dashboard") {
+					@navItem("/dashboard", activeMenu == "dashboard") {
 						Dashboard
 					}
-					@navItem("/temps") {
+					@navItem("/temps", activeMenu == "temps") {
 						Temperatur
 					}
-					@navItem("/light") {
+					@navItem("/light", activeMenu == "light") {
 						Licht
 					}
-					@navItem("/settings") {
+					@navItem("/settings", activeMenu == "settings") {
 						Einstellungen
 					}
 				</nav>
