@@ -10,22 +10,23 @@
 #include <Adafruit_SSD1306.h>
 #include <Arduino.h>
 #include "lightcontrol_mgr.h"
+#include "mic_volume_nb.h"
 
 // LEDs
 #define LED_GREEN 23
-
 
 SettingsMgr settingsmgr;
 WifiMgr wifimgr;
 TimeMgr timemgr(settingsmgr);
 PCOnlineMgr pconlinemgr;
 DHTMgr dhtmgr;
+MicVolumeNB::Config micCfg;
+MicVolumeNB mic(micCfg);
 LightcontrolMgr lightmgr(timemgr, settingsmgr, dhtmgr, pconlinemgr);
 WebserverMgr webserv(dhtmgr, timemgr, pconlinemgr, settingsmgr, lightmgr);
 OledMgr oled(128, 64, timemgr, pconlinemgr, dhtmgr, settingsmgr);
 
-// Mic stuff
-#define MIC_PIN 35
+unsigned long lastPrintVolume = 0;
 
 // pin modes (input output)
 void setPinModes() { 
@@ -40,6 +41,11 @@ void setup() {
 
   setPinModes();
   dhtmgr.setup();
+	micCfg.pin = 35;    
+	micCfg.sampleRateHz = 8000;
+	micCfg.windowMs = 50;
+	micCfg.smoothing = 0.25f;
+	mic.begin();
 
   esp_chip_info_t chip_info;
   esp_chip_info(&chip_info);
@@ -58,6 +64,7 @@ void setup() {
 void loop() {
   pconlinemgr.loop();
   dhtmgr.loop();
+	mic.update();
   webserv.loop();
 	lightmgr.loop();
   oled.updateDisplay();
@@ -69,7 +76,13 @@ void loop() {
   }
   digitalWrite(LED_GREEN, HIGH);
 
-	int v = analogRead(MIC_PIN);
-	Serial.println(v);
-	delay(10);
+	if (millis() - lastPrintVolume >= 500) {
+		lastPrintVolume = millis();
+		Serial.print("level=");
+		Serial.print(mic.level());
+		Serial.print(" p2p=");
+		Serial.print(mic.lastPeakToPeak());
+		Serial.print(" noise=");
+		Serial.println(mic.noiseFloor());
+	}
 }
