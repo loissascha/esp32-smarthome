@@ -25,13 +25,13 @@ WebserverMgr webserv(dhtmgr, timemgr, pconlinemgr, settingsmgr, lightmgr);
 OledMgr oled(128, 64, timemgr, pconlinemgr, dhtmgr, settingsmgr);
 
 // Mic stuff
-#define MIC_PIN 27
-static const bool activeLow = true;
+#define MIC_PIN 35
 
 // pin modes (input output)
 void setPinModes() { 
 	pinMode(LED_GREEN, OUTPUT);
-	pinMode(MIC_PIN, INPUT);
+	//pinMode(MIC_PIN, INPUT);
+	analogReadResolution(12);
 }
 
 void setup() {
@@ -69,8 +69,7 @@ void loop() {
   }
   digitalWrite(LED_GREEN, HIGH);
 
-	int sound = digitalRead(MIC_PIN);
-	if (sound == LOW) {
-		Serial.println("sound");
-	}
+	int v = analogRead(MIC_PIN);
+	Serial.println(v);
+	delay(10);
 }
