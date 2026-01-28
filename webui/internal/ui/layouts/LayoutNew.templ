@@ -4,7 +4,7 @@ templ navItem(href string, active bool) {
 {{
 activeClass := "bg-neutral-800"
 if active {
-activeClass = "bg-neutral-700"
+activeClass = "bg-neutral-700 font-bold"
 }
 }}
 	<a href={ href } class={"cursor-pointer select-none p-4 " + activeClass}>

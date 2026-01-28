@@ -31,7 +31,7 @@ func navItem(href string, active bool) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		activeClass := "bg-neutral-800"
 		if active {
-			activeClass = "bg-neutral-700"
+			activeClass = "bg-neutral-700 font-bold"
 		}
 		var templ_7745c5c3_Var2 = []any{"cursor-pointer select-none p-4 " + activeClass}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
