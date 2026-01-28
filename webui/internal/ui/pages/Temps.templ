@@ -4,6 +4,41 @@ import "github.com/loissascha/go-templ-template/internal/ui/layouts"
 
 templ Temps() {
 	@layouts.LayoutNew() {
-		Temps
+		<div>
+			<div class="w-48 h-24 relative">
+				<div class="rounded-t-full bg-neutral-400 absolute w-full h-full"></div>
+			</div>
+		</div>
+		<div class="relative w-48 h-24 overflow-hidden">
+			<!-- background half circle -->
+			<div class="absolute inset-0 rounded-t-full bg-gray-300"></div>
+			<!-- progress fill -->
+			<div
+				class="absolute inset-0 rounded-t-full bg-green-500 origin-bottom-center transition-transform duration-500"
+				style="transform: rotate(120deg);"
+			></div>
+			<!-- inner cutout -->
+			<div class="absolute inset-2 rounded-t-full bg-white"></div>
+			<!-- centered text -->
+			<div class="absolute inset-0 flex items-end justify-center pb-4">
+				<span class="text-xl font-semibold">66%</span>
+			</div>
+		</div>
+		<div class="grid grid-cols-2 gap-4 p-4">
+			<div class="text-center">
+				<h1 class="text-4xl font-bold">Temperatur</h1>
+				<span>
+					<span hx-get="/partials/components/temp" hx-swap="innerHTML" hx-trigger="load, every 10s"></span>
+					<strong>°C</strong>
+				</span>
+			</div>
+			<div class="text-center">
+				<h1 class="text-4xl font-bold">Luftfeuchtigkeit</h1>
+				<span>
+					<span hx-get="/partials/components/humidity" hx-swap="innerHTML" hx-trigger="load, every 10s"></span>
+					<strong>%</strong>
+				</span>
+			</div>
+		</div>
 	}
 }
