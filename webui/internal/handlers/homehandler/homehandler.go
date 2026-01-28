@@ -24,6 +24,8 @@ func New(s *server.Server, esps *espservice.ESPService) *HomeHandler {
 
 func (h *HomeHandler) RegisterHandlers(s *server.Server) {
 	s.GET("/", h.homeRoute)
+	s.GET("/dashboard", h.dashboardRoute)
+	s.GET("/temps", h.tempsRoute)
 	s.GET("/partials/infos", h.partialsInfos)
 	s.GET("/partials/components/{component}", h.handleComponent)
 	s.POST("/tischlampe/mode/{mode}", h.tischlampeMode)
@@ -82,4 +84,12 @@ func (h *HomeHandler) partialsInfos(w http.ResponseWriter, r *http.Request) {
 func (h *HomeHandler) homeRoute(w http.ResponseWriter, r *http.Request) {
 	homeComponent := pages.Home(h.espserv.Sensors)
 	homeComponent.Render(r.Context(), w)
+}
+
+func (h *HomeHandler) dashboardRoute(w http.ResponseWriter, r *http.Request) {
+	pages.Dashboard().Render(r.Context(), w)
+}
+
+func (h *HomeHandler) tempsRoute(w http.ResponseWriter, r *http.Request) {
+	pages.Temps().Render(r.Context(), w)
 }

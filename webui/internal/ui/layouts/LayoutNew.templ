@@ -1,0 +1,39 @@
+package layouts
+
+templ navItem(href string) {
+	<a href={ href } class="cursor-pointer select-none bg-neutral-800 p-4">
+		{ children... }
+	</a>
+}
+
+templ LayoutNew() {
+	<!DOCTYPE html>
+	<html lang="de">
+		<head>
+			<title>Go + Templ + Air</title>
+			<link href="/static/output.css" rel="stylesheet"/>
+			<script src="/static/htmx.min.js"></script>
+		</head>
+		<body class="bg-neutral-900 text-neutral-200">
+			<div class="flex flex-col min-w-dvw min-h-dvh">
+				<nav class="flex justify-center items-center gap-4 border-b border-neutral-700">
+					@navItem("/dashboard") {
+						Dashboard
+					}
+					@navItem("/temps") {
+						Temperatur
+					}
+					@navItem("/light") {
+						Licht
+					}
+					@navItem("/settings") {
+						Einstellungen
+					}
+				</nav>
+				<div class="grow">
+					{ children... }
+				</div>
+			</div>
+		</body>
+	</html>
+}
