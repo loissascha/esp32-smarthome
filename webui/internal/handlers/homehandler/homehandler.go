@@ -37,7 +37,7 @@ func (h *HomeHandler) handleComponent(w http.ResponseWriter, r *http.Request) {
 
 	switch component {
 	case "temp":
-		fmt.Fprintf(w, "%.2f", h.espserv.Sensors.TempC)
+		partials.TempGauge(h.espserv.Sensors.TempC).Render(r.Context(), w)
 	case "humidity":
 		fmt.Fprintf(w, "%.2f", h.espserv.Sensors.Humidity)
 	case "voice":

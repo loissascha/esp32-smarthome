@@ -5,7 +5,13 @@ import "github.com/loissascha/go-templ-template/internal/ui/layouts"
 templ Temps() {
 	@layouts.LayoutNew() {
 		<div class="grid grid-cols-2 gap-4 p-4 h-full">
-			<div class="flex justify-center items-center">
+			<div
+				hx-get="/partials/components/temp"
+				hx-swap="innerHTML"
+				hx-trigger="load, every 10s"
+				class="flex justify-center items-center"
+			></div>
+			<div class="flex justify-center items-center text-center flex-col">
 				<div class="relative w-64">
 					<svg class="block w-full h-auto" viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg">
 						<path
@@ -33,23 +39,16 @@ templ Temps() {
 						<div class="text-center">
 							<div class="text-3xl font-semibold leading-none">
 								<span
-									hx-get="/partials/components/temp"
+									hx-get="/partials/components/humidity"
 									hx-swap="innerHTML"
 									hx-trigger="load, every 10s"
 								></span>
-								°C
+								%
 							</div>
-							<div class="text-sm text-gray-500">Target: 24.00 °C</div>
+							<div class="text-sm text-gray-500">Luftfeuchtigkeit</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="flex justify-center items-center text-center flex-col">
-				<h1 class="text-4xl font-bold">Luftfeuchtigkeit</h1>
-				<span>
-					<span hx-get="/partials/components/humidity" hx-swap="innerHTML" hx-trigger="load, every 10s"></span>
-					<strong>%</strong>
-				</span>
 			</div>
 		</div>
 	}
