@@ -1,7 +1,7 @@
 #include "webserver_mgr.h"
 
-WebserverMgr::WebserverMgr(DHTMgr &dhtmgr, TimeMgr &timemgr, PCOnlineMgr &pconlinemgr, SettingsMgr &settingsmgr, LightcontrolMgr &lightcontrolmgr) : 
-	server(80), dhtmgr(dhtmgr), timemgr(timemgr), pconlinemgr(pconlinemgr), settingsmgr(settingsmgr), lightcontrolmgr(lightcontrolmgr) {}
+WebserverMgr::WebserverMgr(DHTMgr &dhtmgr, TimeMgr &timemgr, PCOnlineMgr &pconlinemgr, SettingsMgr &settingsmgr, LightcontrolMgr &lightcontrolmgr, MicVolumeNB &mic) : 
+	server(80), dhtmgr(dhtmgr), timemgr(timemgr), pconlinemgr(pconlinemgr), settingsmgr(settingsmgr), lightcontrolmgr(lightcontrolmgr), mic(mic) {}
 
 void WebserverMgr::handleRoot() {
   String out;
@@ -20,11 +20,12 @@ void WebserverMgr::handleSensors() {
 	int dayStartMinute = settingsmgr.daytimeStartMinute;
 	int dayEndHour = settingsmgr.daytimeEndHour;
 	int dayEndMinute = settingsmgr.daytimeEndMinute;
+	int voiceLevel = mic.level();
 	String out = "";
 	out += "{ \"tempC\": ";
 	out += String(temp) + ",";
 	out += " \"humidity\": " + String(humidity) + ",";
-	out += " \"voice_level\": 0,";
+	out += " \"voice_level\": " + String(voiceLevel) + ",";
 	out += " \"tischlampe_manual_mode\": " + String(tischlampeManualMode) + ",";
 	out += " \"tischlampe_status\": " + String(tischlampeStatus) + ",";
 	out += " \"is_daytime\": " + String(isDaytime) + ",";

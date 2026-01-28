@@ -23,7 +23,7 @@ DHTMgr dhtmgr;
 MicVolumeNB::Config micCfg;
 MicVolumeNB mic(micCfg);
 LightcontrolMgr lightmgr(timemgr, settingsmgr, dhtmgr, pconlinemgr);
-WebserverMgr webserv(dhtmgr, timemgr, pconlinemgr, settingsmgr, lightmgr);
+WebserverMgr webserv(dhtmgr, timemgr, pconlinemgr, settingsmgr, lightmgr, mic);
 OledMgr oled(128, 64, timemgr, pconlinemgr, dhtmgr, settingsmgr);
 
 unsigned long lastPrintVolume = 0;
