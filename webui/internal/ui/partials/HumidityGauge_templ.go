@@ -29,33 +29,62 @@ func HumidityGauge(humidity float64, percent int) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"relative w-64\"><svg class=\"block w-full h-auto\" viewBox=\"0 0 200 110\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 100 A 80 80 0 0 1 180 100\" fill=\"none\" stroke=\"rgb(209 213 219)\" stroke-width=\"16\" stroke-linecap=\"round\"></path> <path id=\"progressArc\" d=\"M 20 100 A 80 80 0 0 1 180 100\" fill=\"none\" stroke=\"rgb(34 197 94)\" stroke-width=\"16\" stroke-linecap=\"round\" pathLength=\"100\" stroke-dasharray=\"100\" stroke-dashoffset=\"")
+		color := "text-blue-400"
+		if percent >= 40 {
+			color = "text-green-500"
+		}
+		if percent >= 60 {
+			color = "text-red-600"
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"relative w-84\"><svg class=\"block w-full h-auto\" viewBox=\"0 0 200 110\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 100 A 80 80 0 0 1 180 100\" fill=\"none\" class=\"text-neutral-300\" stroke=\"currentColor\" stroke-width=\"16\" stroke-linecap=\"round\"></path> ")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(100 - percent)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/partials/HumidityGauge.templ`, Line: 22, Col: 37}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+		var templ_7745c5c3_Var2 = []any{color}
+		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\" style=\"transition: stroke-dashoffset 500ms ease;\"></path></svg><!-- centered text --><div class=\"absolute inset-0 flex items-end justify-center pb-4\"><div class=\"text-center\"><div class=\"text-3xl font-semibold leading-none\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<path id=\"progressArc\" d=\"M 20 100 A 80 80 0 0 1 180 100\" fill=\"none\" class=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
-		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(humidity)
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var2).String())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/partials/HumidityGauge.templ`, Line: 30, Col: 15}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/partials/HumidityGauge.templ`, Line: 1, Col: 0}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, " %</div><div class=\"text-sm text-gray-500\">Luftfeuchtigkeit</div></div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" stroke=\"currentColor\" stroke-width=\"16\" stroke-linecap=\"round\" pathLength=\"100\" stroke-dasharray=\"100\" stroke-dashoffset=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(100 - percent)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/partials/HumidityGauge.templ`, Line: 33, Col: 37}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\" style=\"transition: stroke-dashoffset 500ms ease;\"></path></svg><!-- centered text --><div class=\"absolute inset-0 flex items-end justify-center pb-4\"><div class=\"text-center\"><div class=\"text-4xl font-semibold leading-none\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(humidity)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/partials/HumidityGauge.templ`, Line: 41, Col: 15}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, " %</div><div class=\"text-md text-gray-500\">Luftfeuchtigkeit</div></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
