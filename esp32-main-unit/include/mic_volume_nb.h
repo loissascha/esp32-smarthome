@@ -28,9 +28,9 @@ public:
   void begin() {
     pinMode(_cfg.pin, INPUT);
 
-    analogReadResolution(12);
+    //analogReadResolution(12);
     // If your mic output range seems "compressed", try:
-    // analogSetAttenuation(ADC_11db);
+    analogSetAttenuation(ADC_11db);
 
     _sampleIntervalUs = 1000000UL / (uint32_t)_cfg.sampleRateHz;
     _windowUs = (uint32_t)_cfg.windowMs * 1000UL;
@@ -54,8 +54,12 @@ public:
     const uint32_t now = micros();
 
     // Take at most one sample when it's time
-    if ((uint32_t)(now - _lastSampleUs) >= _sampleIntervalUs) {
-      _lastSampleUs += _sampleIntervalUs; // steady pacing
+		if ((uint32_t)(now - _lastSampleUs) >= _sampleIntervalUs) {
+			if ((uint32_t)(now - _lastSampleUs) > 5 * _sampleIntervalUs) {
+				_lastSampleUs = now;       // resync if we fell behind
+			} else {
+				_lastSampleUs += _sampleIntervalUs;
+			}
 
       uint16_t v = analogRead(_cfg.pin);
       if (v < _minV) _minV = v;
@@ -63,13 +67,19 @@ public:
     }
 
     // Finalize a window when it's over
-    if ((uint32_t)(now - _windowStartUs) >= _windowUs) {
-      finalizeWindow();
-      _windowStartUs += _windowUs;
-
-      _minV = 4095;
-      _maxV = 0;
-    }
+		while ((uint32_t)(now - _windowStartUs) >= _windowUs) {
+			finalizeWindow();
+			_windowStartUs += _windowUs;
+			_minV = 4095;
+			_maxV = 0;
+		}
+    // if ((uint32_t)(now - _windowStartUs) >= _windowUs) {
+    //   finalizeWindow();
+    //   _windowStartUs += _windowUs;
+    //
+    //   _minV = 4095;
+    //   _maxV = 0;
+    // }
   }
 
   int level() const { return _level; }

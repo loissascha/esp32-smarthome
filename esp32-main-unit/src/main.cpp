@@ -84,5 +84,6 @@ void loop() {
 		Serial.print(mic.lastPeakToPeak());
 		Serial.print(" noise=");
 		Serial.println(mic.noiseFloor());
+		Serial.println(analogRead(35));
 	}
 }
