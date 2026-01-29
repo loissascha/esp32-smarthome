@@ -2,12 +2,12 @@ package layouts
 
 templ navItem(href string, active bool) {
 	{{
-		activeClass := "bg-neutral-800"
+		activeClass := "border-neutral-600"
 		if active {
-			activeClass = "bg-neutral-700 font-bold"
+			activeClass = "border-neutral-500 font-bold shadow-xs shadow-neutral-500"
 		}
 	}}
-	<a href={ href } class={ "cursor-pointer select-none p-4 " + activeClass }>
+	<a href={ href } class={ "cursor-pointer select-none py-3 px-6 border rounded-lg " + activeClass }>
 		{ children... }
 	</a>
 }
@@ -22,7 +22,7 @@ templ LayoutNew(activeMenu string) {
 		</head>
 		<body class="bg-neutral-900 text-neutral-200">
 			<div class="flex flex-col min-w-dvw min-h-dvh">
-				<nav class="flex justify-center items-center gap-4 border-b border-neutral-700">
+				<nav class="flex justify-center items-center gap-4 py-2">
 					@navItem("/dashboard", activeMenu == "dashboard") {
 						Dashboard
 					}
