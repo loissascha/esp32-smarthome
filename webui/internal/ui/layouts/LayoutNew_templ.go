@@ -101,7 +101,7 @@ func LayoutNew(activeMenu string) templ.Component {
 			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<!doctype html><html lang=\" de\"><head><title>Go + Templ + Air</title><link href=\"/static/output.css\" rel=\"stylesheet\"><script src=\"/static/htmx.min.js\"></script></head><body class=\"bg-neutral-900 text-neutral-200\"><div class=\"flex flex-col min-w-dvw min-h-dvh\"><nav class=\"flex justify-center items-center gap-4 py-2\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<!doctype html><html lang=\" de\"><head><title>Dashboard</title><link href=\"/static/output.css\" rel=\"stylesheet\"><script src=\"/static/htmx.min.js\"></script></head><body class=\"bg-neutral-900 text-neutral-200\"><div class=\"flex flex-col min-w-dvw min-h-dvh\"><nav class=\"flex justify-center items-center gap-4 py-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -183,13 +183,13 @@ func LayoutNew(activeMenu string) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "Einstellungen")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "Lautstärke")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = navItem("/settings", activeMenu == "settings").Render(templ.WithChildren(ctx, templ_7745c5c3_Var9), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = navItem("/sound", activeMenu == "sound").Render(templ.WithChildren(ctx, templ_7745c5c3_Var9), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

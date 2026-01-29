@@ -16,7 +16,7 @@ templ LayoutNew(activeMenu string) {
 	<!DOCTYPE html>
 	<html lang=" de">
 		<head>
-			<title>Go + Templ + Air</title>
+			<title>Dashboard</title>
 			<link href="/static/output.css" rel="stylesheet"/>
 			<script src="/static/htmx.min.js"></script>
 		</head>
@@ -32,8 +32,8 @@ templ LayoutNew(activeMenu string) {
 					@navItem("/light", activeMenu == "light") {
 						Licht
 					}
-					@navItem("/settings", activeMenu == "settings") {
-						Einstellungen
+					@navItem("/sound", activeMenu == "sound") {
+						Lautstärke
 					}
 				</nav>
 				<div class="grow grid">
