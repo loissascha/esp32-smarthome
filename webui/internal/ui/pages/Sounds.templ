@@ -5,6 +5,7 @@ import "github.com/loissascha/go-templ-template/internal/ui/layouts"
 templ Sounds() {
 	@layouts.LayoutNew("sound") {
 		<div
+			id="voice-gauge"
 			hx-get="/partials/components/voice"
 			hx-swap="innerHTML"
 			hx-trigger="load, every 1s"
