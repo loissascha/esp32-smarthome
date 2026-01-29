@@ -46,6 +46,7 @@ func (h *HomeHandler) RegisterHandlers(s *server.Server) {
 	s.GET("/dashboard", h.dashboardRoute)
 	s.GET("/temps", h.tempsRoute)
 	s.GET("/light", h.lightsRoute)
+	s.GET("/sound", h.soundsRoute)
 	s.GET("/partials/infos", h.partialsInfos)
 	s.GET("/partials/components/{component}", h.handleComponent)
 	s.POST("/tischlampe/mode/{mode}", h.tischlampeMode)
@@ -63,7 +64,8 @@ func (h *HomeHandler) handleComponent(w http.ResponseWriter, r *http.Request) {
 		p := percent(0, 100, h.espserv.Sensors.Humidity)
 		partials.HumidityGauge(h.espserv.Sensors.Humidity, p).Render(r.Context(), w)
 	case "voice":
-		fmt.Fprintf(w, "%.0f", h.espserv.Sensors.VoiceLevel)
+		p := percent(0, 100, h.espserv.Sensors.VoiceLevel)
+		partials.SoundGauge(h.espserv.Sensors.VoiceLevel, p).Render(r.Context(), w)
 	case "tischlampestatus":
 		partials.TischlampeStatusButton(h.espserv.Sensors.TischlampeStatus).Render(r.Context(), w)
 	case "stehlampestatus":
@@ -120,4 +122,8 @@ func (h *HomeHandler) tempsRoute(w http.ResponseWriter, r *http.Request) {
 
 func (h *HomeHandler) lightsRoute(w http.ResponseWriter, r *http.Request) {
 	pages.Lights().Render(r.Context(), w)
+}
+
+func (h *HomeHandler) soundsRoute(w http.ResponseWriter, r *http.Request) {
+	pages.Sounds().Render(r.Context(), w)
 }

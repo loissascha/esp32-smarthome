@@ -2,14 +2,8 @@ package pages
 
 import "github.com/loissascha/go-templ-template/internal/ui/layouts"
 
-templ Dashboard() {
-	@layouts.LayoutNew("dashboard") {
-		<div
-			hx-get="/partials/components/pcstatus"
-			hx-swap="innerHTML"
-			hx-trigger="load, every 1s"
-			class="flex justify-center items-center"
-		></div>
+templ Sounds() {
+	@layouts.LayoutNew("sound") {
 		<div
 			hx-get="/partials/components/voice"
 			hx-swap="innerHTML"
