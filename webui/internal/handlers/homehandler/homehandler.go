@@ -45,6 +45,7 @@ func (h *HomeHandler) RegisterHandlers(s *server.Server) {
 	s.GET("/", h.homeRoute)
 	s.GET("/dashboard", h.dashboardRoute)
 	s.GET("/temps", h.tempsRoute)
+	s.GET("/light", h.lightsRoute)
 	s.GET("/partials/infos", h.partialsInfos)
 	s.GET("/partials/components/{component}", h.handleComponent)
 	s.POST("/tischlampe/mode/{mode}", h.tischlampeMode)
@@ -113,4 +114,8 @@ func (h *HomeHandler) dashboardRoute(w http.ResponseWriter, r *http.Request) {
 
 func (h *HomeHandler) tempsRoute(w http.ResponseWriter, r *http.Request) {
 	pages.Temps().Render(r.Context(), w)
+}
+
+func (h *HomeHandler) lightsRoute(w http.ResponseWriter, r *http.Request) {
+	pages.Lights().Render(r.Context(), w)
 }
