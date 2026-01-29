@@ -33,15 +33,15 @@ func TischlampeMode(manualMode bool) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		baseClass := "cursor-pointer "
+		baseClass := "cursor-pointer text-3xl border px-6 py-3 rounded-lg "
 		manualClass := baseClass
 		autoClass := baseClass
 		if manualMode {
-			autoClass += "text-neutral-400"
-			manualClass += "font-semibold"
+			autoClass += "text-neutral-400 border-neutral-600"
+			manualClass += "font-semibold border-neutral-500"
 		} else {
-			manualClass += "text-neutral-400"
-			autoClass += "font-semibold"
+			manualClass += "text-neutral-400 border-neutral-600"
+			autoClass += "font-semibold border-neutral-500"
 		}
 		var templ_7745c5c3_Var2 = []any{manualClass}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
