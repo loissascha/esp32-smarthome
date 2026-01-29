@@ -68,12 +68,12 @@ templ TischlampeStatusButton(status bool) {
 			<button hx-post="/tischlampe/manual/off" hx-target="#tischlampe-status" hx-swap="innerHTML" class="cursor-pointer">
 				@lightBulbOn()
 			</button>
-			<span class="text-sm">An</span>
+			<span class="text-sm">On</span>
 		} else {
 			<button hx-post="/tischlampe/manual/on" hx-target="#tischlampe-status" hx-swap="innerHTML" class="cursor-pointer">
 				@lightBulbOff()
 			</button>
-			<span class="text-sm">Aus</span>
+			<span class="text-sm">Off</span>
 		}
 	</div>
 }
@@ -87,12 +87,12 @@ templ StehlampeStatusButton(status bool) {
 			<button hx-post="/tischlampe/manual/off" hx-target="#tischlampe-status" hx-swap="innerHTML" class="cursor-pointer">
 				@lightBulbOn()
 			</button>
-			<span class="text-sm">An</span>
+			<span class="text-sm">On</span>
 		} else {
 			<button hx-post="/tischlampe/manual/on" hx-target="#tischlampe-status" hx-swap="innerHTML" class="cursor-pointer">
 				@lightBulbOff()
 			</button>
-			<span class="text-sm">Aus</span>
+			<span class="text-sm">Off</span>
 		}
 	</div>
 }

@@ -63,9 +63,10 @@ func HumidityGauge(humidity float64, percent int) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(100 - percent)
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(100 -
+			percent)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/partials/HumidityGauge.templ`, Line: 33, Col: 37}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/partials/HumidityGauge.templ`, Line: 34, Col: 10}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -78,13 +79,13 @@ func HumidityGauge(humidity float64, percent int) templ.Component {
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(humidity)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/partials/HumidityGauge.templ`, Line: 41, Col: 15}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/ui/partials/HumidityGauge.templ`, Line: 42, Col: 15}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, " %</div><div class=\"text-md text-gray-500\">Luftfeuchtigkeit</div></div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, " %</div><div class=\"text-md text-gray-500\">Humidity</div></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
