@@ -11,11 +11,25 @@ templ Lights() {
 			hx-swap="innerHTML"
 			hx-trigger="load"
 		></div>
-		<div
-			id="tischlampe-status"
-			hx-get="/partials/components/tischlampestatus"
-			hx-swap="innerHTML"
-			hx-trigger="load, every 1s"
-		></div>
+		<div class="grid grid-cols-3">
+			<div
+				id="tischlampe-status"
+				hx-get="/partials/components/tischlampestatus"
+				hx-swap="innerHTML"
+				hx-trigger="load, every 1s"
+			></div>
+			<div
+				id="stehlampe-status"
+				hx-get="/partials/components/stehlampestatus"
+				hx-swap="innerHTML"
+				hx-trigger="load, every 1s"
+			></div>
+			<div
+				id="hauptlampe-status"
+				hx-get="/partials/components/stehlampestatus"
+				hx-swap="innerHTML"
+				hx-trigger="load, every 1s"
+			></div>
+		</div>
 	}
 }

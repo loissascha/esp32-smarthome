@@ -66,6 +66,8 @@ func (h *HomeHandler) handleComponent(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "%.0f", h.espserv.Sensors.VoiceLevel)
 	case "tischlampestatus":
 		partials.TischlampeStatusButton(h.espserv.Sensors.TischlampeStatus).Render(r.Context(), w)
+	case "stehlampestatus":
+		partials.StehlampeStatusButton(h.espserv.Sensors.TischlampeStatus).Render(r.Context(), w)
 	case "tischlampemode":
 		partials.TischlampeMode(h.espserv.Sensors.TischlampeManualMode).Render(r.Context(), w)
 	case "pcstatus":

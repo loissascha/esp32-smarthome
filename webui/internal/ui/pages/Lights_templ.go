@@ -43,7 +43,7 @@ func Lights() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"grow\" id=\"tischlampe-mode\" hx-get=\"/partials/components/tischlampemode\" hx-swap=\"innerHTML\" hx-trigger=\"load\"></div><div id=\"tischlampe-status\" hx-get=\"/partials/components/tischlampestatus\" hx-swap=\"innerHTML\" hx-trigger=\"load, every 1s\"></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"grow\" id=\"tischlampe-mode\" hx-get=\"/partials/components/tischlampemode\" hx-swap=\"innerHTML\" hx-trigger=\"load\"></div><div class=\"grid grid-cols-3\"><div id=\"tischlampe-status\" hx-get=\"/partials/components/tischlampestatus\" hx-swap=\"innerHTML\" hx-trigger=\"load, every 1s\"></div><div id=\"stehlampe-status\" hx-get=\"/partials/components/stehlampestatus\" hx-swap=\"innerHTML\" hx-trigger=\"load, every 1s\"></div><div id=\"hauptlampe-status\" hx-get=\"/partials/components/stehlampestatus\" hx-swap=\"innerHTML\" hx-trigger=\"load, every 1s\"></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
