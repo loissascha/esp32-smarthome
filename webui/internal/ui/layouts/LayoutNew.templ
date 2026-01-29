@@ -1,20 +1,20 @@
 package layouts
 
 templ navItem(href string, active bool) {
-{{
-activeClass := "bg-neutral-800"
-if active {
-activeClass = "bg-neutral-700 font-bold"
-}
-}}
-	<a href={ href } class={"cursor-pointer select-none p-4 " + activeClass}>
+	{{
+		activeClass := "bg-neutral-800"
+		if active {
+			activeClass = "bg-neutral-700 font-bold"
+		}
+	}}
+	<a href={ href } class={ "cursor-pointer select-none p-4 " + activeClass }>
 		{ children... }
 	</a>
 }
 
 templ LayoutNew(activeMenu string) {
 	<!DOCTYPE html>
-	<html lang="de">
+	<html lang=" de">
 		<head>
 			<title>Go + Templ + Air</title>
 			<link href="/static/output.css" rel="stylesheet"/>
