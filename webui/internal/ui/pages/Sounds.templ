@@ -6,8 +6,9 @@ templ Sounds() {
 	@layouts.LayoutNew("sound") {
 		<div
 			id="voice-gauge"
+			hx-ext="morph"
 			hx-get="/partials/components/voice"
-			hx-swap="innerHTML"
+			hx-swap="morph:innerHTML"
 			hx-trigger="load, every 1s"
 			class="flex justify-center items-center"
 		></div>

@@ -43,7 +43,7 @@ func Sounds() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div id=\"voice-gauge\" hx-get=\"/partials/components/voice\" hx-swap=\"innerHTML\" hx-trigger=\"load, every 1s\" class=\"flex justify-center items-center\"></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div id=\"voice-gauge\" hx-ext=\"morph\" hx-get=\"/partials/components/voice\" hx-swap=\"morph:innerHTML\" hx-trigger=\"load, every 1s\" class=\"flex justify-center items-center\"></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

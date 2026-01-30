@@ -43,7 +43,7 @@ func Temps() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"grid grid-cols-2 gap-4 p-4 h-full\"><div hx-get=\"/partials/components/temp\" hx-swap=\"innerHTML\" hx-trigger=\"load, every 10s\" class=\"flex justify-center items-center\"></div><div hx-get=\"/partials/components/humidity\" hx-swap=\"innerHTML\" hx-trigger=\"load, every 10s\" class=\"flex justify-center items-center\"></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"grid grid-cols-2 gap-4 p-4 h-full\"><div hx-get=\"/partials/components/temp\" hx-ext=\"morph\" hx-swap=\"morph:innerHTML\" hx-trigger=\"load, every 10s\" class=\"flex justify-center items-center\"></div><div hx-get=\"/partials/components/humidity\" hx-ext=\"morph\" hx-swap=\"morph:innerHTML\" hx-trigger=\"load, every 10s\" class=\"flex justify-center items-center\"></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

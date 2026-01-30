@@ -12,7 +12,8 @@ templ Dashboard() {
 		></div>
 		<div
 			hx-get="/partials/components/voice"
-			hx-swap="innerHTML"
+			hx-ext="morph"
+			hx-swap="morph:innerHTML"
 			hx-trigger="load, every 1s"
 			class="flex justify-center items-center"
 		></div>
