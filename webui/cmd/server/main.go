@@ -10,6 +10,7 @@ import (
 	"github.com/loissascha/go-logger/logger"
 	"github.com/loissascha/go-templ-template/internal/handlers/homehandler"
 	"github.com/loissascha/go-templ-template/internal/services/espservice"
+	"github.com/loissascha/go-templ-template/internal/services/haservice"
 )
 
 func main() {
@@ -27,6 +28,12 @@ func main() {
 
 	// service
 	espS := espservice.New()
+	haS := haservice.New()
+
+	err = haS.LoadLightStates()
+	if err != nil {
+		panic(err)
+	}
 
 	go func() {
 		espS.RunSync()
