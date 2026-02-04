@@ -36,9 +36,9 @@ void LightcontrolMgr::loop() {
 	if (newStatus != tischlampeStatus) {
 		tischlampeStatus = newStatus;
 		if (newStatus) {
-			turnOnTischlampe();
+			//turnOnTischlampe();
 		} else {
-			turnOffTischlampe();
+			//turnOffTischlampe();
 		}
 	}
 }
