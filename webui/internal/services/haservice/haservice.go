@@ -1,6 +1,7 @@
 package haservice
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -16,10 +17,13 @@ var registeredLights = []string{"light.tischlampe", "light.stehlampe"}
 var registeredThermostates = []string{"climate.wohnzimmer_thermostat"}
 
 type HAService struct {
+	Lights []*entities.EntityState
 }
 
 func New() *HAService {
-	h := &HAService{}
+	h := &HAService{
+		Lights: []*entities.EntityState{},
+	}
 	return h
 }
 
@@ -30,7 +34,98 @@ func (h *HAService) LoadLightStates() error {
 			return err
 		}
 		fmt.Println(res)
+		h.Lights = append(h.Lights, res)
 	}
+	return nil
+}
+
+func (h *HAService) TurnOffLight(e *entities.EntityState) error {
+	type Body struct {
+		EntityId string `json:"entity_id"`
+	}
+	b := Body{
+		EntityId: e.EntityID,
+	}
+	bj, err := json.Marshal(b)
+	if err != nil {
+		return err
+	}
+	req, err := http.NewRequest(
+		http.MethodPost,
+		"http://192.168.0.96:8123/api/services/light/turn_off",
+		bytes.NewReader(bj),
+	)
+	if err != nil {
+		return err
+	}
+
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
+	req.Header.Set("Content-Type", "application/json")
+
+	client := http.Client{
+		Timeout: 10 * time.Second,
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	// body, err := io.ReadAll(resp.Body)
+	// if err != nil {
+	// 	return err
+	// }
+
+	fmt.Println("Status:", resp.Status)
+	// fmt.Println("Body:", string(body))
+
+	if resp.StatusCode != 200 {
+		return fmt.Errorf("Non successful status code")
+	}
+
+	return nil
+}
+
+func (h *HAService) TurnOnLight(e *entities.EntityState) error {
+	type Body struct {
+		EntityId string `json:"entity_id"`
+	}
+	b := Body{
+		EntityId: e.EntityID,
+	}
+	bj, err := json.Marshal(b)
+	if err != nil {
+		return err
+	}
+	req, err := http.NewRequest(
+		http.MethodPost,
+		"http://192.168.0.96:8123/api/services/light/turn_on",
+		bytes.NewReader(bj),
+	)
+	if err != nil {
+		return err
+	}
+
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
+	req.Header.Set("Content-Type", "application/json")
+
+	client := http.Client{
+		Timeout: 10 * time.Second,
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("Status:", resp.Status)
+	fmt.Println("Body:", string(body))
+
 	return nil
 }
 

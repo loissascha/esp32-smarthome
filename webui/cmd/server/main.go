@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/joho/godotenv"
 	"github.com/loissascha/go-http-server/server"
@@ -33,6 +34,14 @@ func main() {
 	err = haS.LoadLightStates()
 	if err != nil {
 		panic(err)
+	}
+
+	for _, l := range haS.Lights {
+		haS.TurnOnLight(l)
+	}
+	time.Sleep(5 * time.Second)
+	for _, l := range haS.Lights {
+		haS.TurnOffLight(l)
 	}
 
 	go func() {
