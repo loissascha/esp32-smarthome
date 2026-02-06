@@ -4,10 +4,6 @@ on:
   push:
     branches: ["main"]
 
-concurrency:
-  group: esp32-smarthome-main
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: self-hosted
