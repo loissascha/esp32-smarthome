@@ -1,0 +1,53 @@
+name: Build webui (Go)
+
+on:
+  push:
+    branches: ["main"]
+
+concurrency:
+  group: esp32-smarthome-main
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: webui
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build into ./out
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # 1) create .env
+          echo "PORT=42069" > .env
+
+          # cleanup old builds + 2) create out
+          rm -rf out
+          mkdir -p out
+
+          # 3) copy .env into out
+          cp .env out/.env
+
+          # 4) go build -o ./out/server ./cmd/server
+          go mod download
+          go build -o ./out/server ./cmd/server
+
+          # 5) cp -r src ./out/
+          cp -r src ./out/
+
+          # 6) cp -r statis ./out/
+          cp -r statis ./out/
+
+      - name: Restart user systemd service
+        run: |
+          set -euo pipefail
+          systemctl --user restart esp32-smarthome.service
+          systemctl --user --no-pager --full status esp32-smarthome.service
