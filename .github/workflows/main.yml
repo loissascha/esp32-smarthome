@@ -43,8 +43,8 @@ jobs:
           # 5) cp -r src ./out/
           cp -r src ./out/
 
-          # 6) cp -r statis ./out/
-          cp -r statis ./out/
+          # 6) cp -r static ./out/
+          cp -r static ./out/
 
       - name: Restart user systemd service
         run: |
